@@ -3,15 +3,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Alert, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function padding(a, b, c, d){
-    return{
-        paddingTop: a,
-        paddingRight: b ? b : a,
-        paddingBottom: c ? c : a,
-        paddingLeft: d ? d : (b ? b : a)
-    }
-}
-
 export default function App() {
 
   return (
