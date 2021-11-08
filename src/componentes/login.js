@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFonts, Montserrat_500Black } from '@expo-google-fonts/inter';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -84,10 +85,12 @@ export default function login() {
     <View style={styles.contenedor}>
       <View style={styles.contenedorLogin}>
         <View style={styles.contenedorTitulo}>
-          <Text style={styles.tituloLogin}>Menú Digital</Text>
+          <Text style={styles.tituloLogin}>PROMETHEUS</Text>
         </View>
         <View style={[styles.contenedorControles, styles.sombraControles]}>
           <View style={styles.controles}>
+            <Text style={styles.texto}>Ingrese su usuario:
+            </Text>
             <TextInput
               value={usuario}
               onChangeText={setUsuario}
@@ -96,6 +99,8 @@ export default function login() {
               autoFocus={focusNombre}
             >
             </TextInput>
+            <Text style={styles.texto}>Ingrese su contraseña:
+            </Text>
             <TextInput
               value={contrasena}
               onChangeText={setContrasena}
@@ -120,18 +125,15 @@ export default function login() {
           </View>
           <View style={styles.contenedorBotonesRedes}>
             <View style={styles.botonRedes}>
-              <Button title="Facebook"
-              ></Button>
+              <Text style={styles.texto}>No esta registrado?</Text>
             </View>
             <View style={styles.botonRedes}>
               <Button 
-                title="Google" color={"#dc3545"}
-                onPress={cerrarSesion}
-              >
-              </Button>
+                title="Registrese aquí" color="#ed7731"
+                onPress={() => this.props.navigation.navigate('./registro.js')}
+              />
             </View>
           </View>
-          
         </View>
       </View>
     </View>
@@ -140,7 +142,7 @@ export default function login() {
 
 const styles = StyleSheet.create({
   contenedor: {
-    backgroundColor: '#e9ecef',
+    backgroundColor: '#072C50',
     alignItems: 'center',
     justifyContent: "center",
     margin:0,
@@ -165,22 +167,23 @@ const styles = StyleSheet.create({
     flexDirection:"column",
     alignItems: "stretch",
     justifyContent:"center",
-    borderWidth: 1,
-    borderColor: "#dedede",
-    borderRadius:25,
-    backgroundColor:"#fff",
     padding:10,
   },
   sombraControles: {
-    shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    
+  },
+  texto:{
+    color: "#ed7731" ,
+    fontSize: 18,
+    fontWeight: "600",
+    fontFamily: 'Montserrat_500Black',
+    textAlign: "center"
   },
   tituloLogin: {
-      color: "#495057" ,
-      fontSize: 40,
-      fontWeight: "500",
+    color: "#ed7731" ,
+    fontSize: 40,
+    fontWeight: "600",
+    fontFamily: 'Montserrat_500Black'
     },
   controles:{
     flex:4,
