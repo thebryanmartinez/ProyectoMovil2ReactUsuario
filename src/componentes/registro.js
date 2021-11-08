@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, Alert, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function padding(a, b, c, d){
     return{

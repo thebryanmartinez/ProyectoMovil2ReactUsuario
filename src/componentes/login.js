@@ -1,9 +1,13 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts, Montserrat_500Black } from '@expo-google-fonts/inter';
 import { Ionicons } from '@expo/vector-icons';
+import Pantalla from './registro';
+
 
 
 export default function login() {
@@ -17,7 +21,7 @@ export default function login() {
     }
     else{
       try {
-        const response = await fetch('http://192.168.1.165:3001/api/autenticacion/iniciosesion/', {
+        const response = await fetch('http://192.168.0.12:3001/api/autenticacion/iniciosesion/', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -55,7 +59,7 @@ export default function login() {
       var token = cliente.token;
       console.log('Bearer ' + token)
       try {
-        const response = await fetch('http://192.168.1.165:3001/api/productos/listar', {
+        const response = await fetch('http://192.168.0.12:3001/api/productos/listar', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
