@@ -8,6 +8,6 @@ import Registro from './src/componentes/registro';
 export default function App() {
   const [usuario, setUsuario]= useState(null);
   return (
-    <Registro></Registro>
+    <Login></Login>
   );
 }

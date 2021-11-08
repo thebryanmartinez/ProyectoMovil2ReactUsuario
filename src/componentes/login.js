@@ -1,27 +1,21 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFonts, Montserrat_500Black } from '@expo-google-fonts/inter';
-import { Ionicons } from '@expo/vector-icons';
-import Pantalla from './registro';
 
-
-
-export default function login() {
+export default function login({ navigation }) {
   const [usuario, setUsuario]= useState(null);
   const [contrasena, setContrasena]= useState(null);
   const [focusNombre, setFocusNombre]= useState(false);
   const presIniciarSesion = async () => {
     if(!usuario || !contrasena){
-      console.log("Debe Escribir los datos completos");
-      Alert.alert("MEDI", "Debe Escribir los datos completos");
+      console.log("Debe escribir los datos completos");
+      Alert.alert("Prometheus", "Debe Escribir los datos completos");
     }
     else{
       try {
-        const response = await fetch('http://192.168.0.12:3001/api/autenticacion/iniciosesion/', {
+        const response = await fetch('http://192.168.1.165:3001/api/autenticacion/iniciosesion/', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -36,13 +30,13 @@ export default function login() {
         console.log(json);
         if(json.data.length==0){
           console.log(json.msj);
-          Alert.alert("MEDI", json.msj);
+          Alert.alert("Prometheus", json.msj);
         }
         else{
           const cliente=JSON.stringify(json.data);
           await AsyncStorage.setItem('cliente', cliente);
           console.log(json.msj);
-          Alert.alert("MEDI", json.msj);
+          Alert.alert("Prometheus", json.msj);
         }
       } catch (error) {
         console.error(error);
@@ -53,13 +47,13 @@ export default function login() {
     var cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
     if(!cliente){
       console.log("Usuario no autenticado");
-      Alert.alert("MEDI", "Usuario no autenticado");
+      Alert.alert("Prometheus", "Usuario no autenticado");
     }
     else{
       var token = cliente.token;
       console.log('Bearer ' + token)
       try {
-        const response = await fetch('http://192.168.0.12:3001/api/productos/listar', {
+        const response = await fetch('http://192.168.1.165:3001/api/productos/listar', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -70,10 +64,10 @@ export default function login() {
         const json = await response.json();
         console.log(json);
         if(json.data.length==0){
-          Alert.alert("MEDI", json.msj);
+          Alert.alert("Prometheus", json.msj);
         }
         else{
-          Alert.alert("MEDI", json.msj);
+          Alert.alert("Prometheus", json.msj);
         }
       } catch (error) {
         console.error(error);
@@ -83,7 +77,7 @@ export default function login() {
   const cerrarSesion = async () =>{
     await AsyncStorage.removeItem('cliente');
     console.log("Sesion Cerrada");
-    Alert.alert("MEDI", "Sesion Cerrada");
+    Alert.alert("Prometheus", "Sesion Cerrada");
   };
   return (
     <View style={styles.contenedor}>
@@ -134,7 +128,7 @@ export default function login() {
             <View style={styles.botonRedes}>
               <Button 
                 title="Registrese aquí" color="#ed7731"
-                onPress={() => this.props.navigation.navigate('./registro.js')}
+                onPress={() => navigation.navigate('Registro')}
               />
             </View>
           </View>
@@ -173,21 +167,16 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     padding:10,
   },
-  sombraControles: {
-    
-  },
   texto:{
     color: "#ed7731" ,
     fontSize: 18,
     fontWeight: "600",
-    fontFamily: 'Montserrat_500Black',
     textAlign: "center"
   },
   tituloLogin: {
     color: "#ed7731" ,
     fontSize: 40,
-    fontWeight: "600",
-    fontFamily: 'Montserrat_500Black'
+    fontWeight: "600"
     },
   controles:{
     flex:4,

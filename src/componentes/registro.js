@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
       paddingBottom: '5px',
       paddingLeft: '30px',
       paddingRight: '30px',
-      borderRadius: '5px',
+      borderRadius: 5,
       backgroundColor: '#ed7731',
   },
   tituloBotones: {
