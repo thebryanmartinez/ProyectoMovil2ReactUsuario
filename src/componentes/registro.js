@@ -73,7 +73,7 @@ export default function App({ navigation }) {
                 <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
                     <Text style={styles.tituloBotones}>Cancelar</Text>
                 </Pressable>
-                <Pressable style={styles.botones}  title="Ingresar" onPress={pressCrearUsuario}>
+                <Pressable style={styles.botones}  title="Ingresar" /* onPress={pressCrearUsuario} */>
                     <Text style={styles.tituloBotones}>Ingresar</Text>
                 </Pressable>
             </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         height:"100%"
     },
     container: {
-    margin: '20px',
+    margin: 20,
     backgroundColor: '#072C50'
   },
   tituloPrometheus: {
@@ -106,15 +106,15 @@ const styles = StyleSheet.create({
   },
   entradaTexto: {
       backgroundColor: '#fff',
-      height: '32px',
-      marginTop: '10px',
-      marginBottom: '10px'
+      height: 32,
+      marginTop: 10,
+      marginBottom: 10
   },
   entradaArea: {
       backgroundColor: '#fff',
-      height: '80px',
-      marginTop: '10px',
-      marginBottom: '10px'
+      height: 80,
+      marginTop: 10,
+      marginBottom: 10
   },
   contenedorBotones: {
     display: 'flex',
@@ -122,11 +122,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   botones: {
-      marginTop: '10px',
-      paddingTop: '5px',
-      paddingBottom: '5px',
-      paddingLeft: '30px',
-      paddingRight: '30px',
+      marginTop: 10,
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 30,
+      paddingRight: 30,
       borderRadius: 5,
       backgroundColor: '#ed7731',
   },
