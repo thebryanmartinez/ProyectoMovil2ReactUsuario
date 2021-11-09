@@ -1,48 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Alert, Pressable, SectionList, ListItem, FlatList, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable, SectionList, ListItem, FlatList, ScrollView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { withSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 export default function App({ navigation }) {
- /* const [nombre_completo, setNombre_Completo]= useState(null);
-  const [contrasena_encriptada, setContrasena_Encriptada]= useState(null);
-  const [nombre_usuario, setNombre_Usuario]= useState(null);
-  const [correo, setCorreo]= useState(null);
-  const [telefono, setTelefono]= useState(null);
-  const [direccion_usuario, setDireccion_Usuario]= useState(false);
-
-  const pressCrearUsuario = async () => {
-    if(!nombre_completo || !contrasena_encriptada || !nombre_usuario || !correo || !telefono || !direccion_usuario){
-      console.log("Debe escribir los datos completos");
-      Alert.alert("Prometheus", "Debe escribir los datos completos");
-    }
-    else{
-      try {
-        var cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
-        var token = cliente.token;
-
-        const response = await fetch('http://192.168.1.165:3001/api/usuarios', {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token,
-                
-            },
-          body: JSON.stringify({
-            nombre_completo: nombre_completo,
-            contrasena_encriptada: contrasena_encriptada,
-            nombre_usuario: nombre_usuario,
-            correo: correo,
-            telefono: telefono,
-            direccion_usuario: direccion_usuario
-          })
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };*/
 
   const SECTIONS = [
       {
@@ -61,50 +23,58 @@ export default function App({ navigation }) {
           ]
       }
   ];
+  
+    const [info, setinfo] = useState([]);
+    const [ejecucion, setEjecucion] = useState(null);
+
+    if(ejecucion==null){
+      try {
+          const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
+          .then((response) => response.json())
+          .then((json) => {
+              setinfo(json);
+              console.log(json);
+          });
+          setEjecucion(false);
+      } 
+      catch (error) {
+          setEjecucion(false);
+          console.error(error);
+      }
+    };
+
+    const cerrarSesion = async () =>{
+      await AsyncStorage.removeItem('cliente');
+      console.log("Sesion Cerrada");
+      Alert.alert("Prometheus", "Sesion Cerrada");
+    };
+
   return (
     <View style={styles.fondo}>
-            <View style={styles.container}>
-            <View style={styles.header}>
-                    <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
-                    <Pressable onPress={() => navigation.replace('Login')}>
-                        <Image source={require('../../assets/img/exit.png')}/>
-                    </Pressable>
-                </View>
-            <ScrollView>
-                <View style={styles.main}>
-                    <Text style={styles.texto}>Camisas</Text>
-                    {/*
-                    <SectionList contentContainerStyle={{ paddingHorizontal: 10}}
-                    stickySectionHeadersEnabled={false}
-                    sections={SECTIONS}
-                    renderSectionHeader={({ section }) => (
-                        <>
-                        <Text style={styles.texto}>{section.title}</Text>
-                        <FlatList data={section.data}
-                        horizontal
-                        renderItem={({ item }) => {
-                            return <ListItem item={item}/>
-                        }}/>
-                        </>
-                    )}
-                    renderItem={({ item, section }) => {
-                        return <ListItem item={item} />
-                    }}
-                    />*/}
-                </View>
+      <View style={styles.container}>
+        <View style={styles.header}>
+            <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
+            <Pressable onPress={() => navigation.replace('Login')}>
+                <Image source={require('../../assets/img/exit.png')}/>
+            </Pressable>
+          </View>
+            <ScrollView style={styles.main}>
+              <Image source={require('../../assets/img/adidas1.jpg')} styles={styles.imagen}/>
+              <Image source={require('../../assets/img/adidas2.jpg')} styles={styles.imagen}/>
+              <Image source={require('../../assets/img/adidas3.jpg')} styles={styles.imagen}/>
             </ScrollView>
-            <View style={styles.footer}> 
-                <Pressable onPress={() => navigation.replace('Principal')}>
-                    <Image source={require('../../assets/img/home.png')}/>
-                </Pressable>
-                <Pressable onPress={() => navigation.replace('Producto')}>
-                    <Image source={require('../../assets/img/search.png')}/>
-                </Pressable>
-                <Pressable >
-                <Image source={require('../../assets/img/user.png')}/>
-                </Pressable>
-            </View>
+          <View style={styles.footer}> 
+            <Pressable onPress={() => navigation.replace('Principal')}>
+                <Image source={require('../../assets/img/home.png')}/>
+            </Pressable>
+            <Pressable onPress={() => navigation.replace('Producto')}>
+                <Image source={require('../../assets/img/search.png')}/>
+            </Pressable>
+            <Pressable >
+            <Image source={require('../../assets/img/user.png')}/>
+            </Pressable>
         </View>
+      </View>
     </View>
   );    
 }
@@ -129,7 +99,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#154472'
     },
     main:{
-        marginTop: 20, 
+        display: 'flex',
+        marginTop: 25, 
         marginLeft: 20,
     },
     footer:{
@@ -176,5 +147,16 @@ const styles = StyleSheet.create({
     color: "#072C50",
     fontSize: 26,
     fontWeight: "700",
+    },
+    productosTexto: {
+      color: '#ed7731',
+      fontSize: 18,
+    },
+    contenedorInfo: {
+      marginRight: 10,
+      marginBottom: 20,
+    },
+    imagen: {
+      marginTop: 20,
     }
 });

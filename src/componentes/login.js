@@ -1,5 +1,5 @@
 import React, { useState }from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Alert, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function login({ navigation }) {
@@ -7,7 +7,7 @@ export default function login({ navigation }) {
   const [contrasena, setContrasena]= useState(null);
   const [focusNombre, setFocusNombre]= useState(false);
 
-  const presIniciarSesion = async () => {
+  const pressIniciarSesion = async () => {
     if(!usuario || !contrasena){
       console.log("Debe escribir los datos completos");
       Alert.alert("Prometheus", "Debe Escribir los datos completos");
@@ -36,6 +36,7 @@ export default function login({ navigation }) {
           await AsyncStorage.setItem('cliente', cliente);
           console.log(json.msj);
           Alert.alert("Prometheus", json.msj);
+          navigation.replace('Principal');
         }
       } catch (error) {
         console.error(error);
@@ -43,11 +44,6 @@ export default function login({ navigation }) {
     }
   };
 
-  const cerrarSesion = async () =>{
-    await AsyncStorage.removeItem('cliente');
-    console.log("Sesion Cerrada");
-    Alert.alert("Prometheus", "Sesion Cerrada");
-  };
   return (
     <View style={styles.contenedor}>
       <View style={styles.contenedorLogin}>
@@ -79,26 +75,18 @@ export default function login({ navigation }) {
             </TextInput>
           </View>
           <View style={styles.contenedorBotones}>
-            <View style={styles.boton}>
-              <Button title="Iniciar Sesión"
-                onPress={() => navigation.replace('Principal')}
-              ></Button>
-            </View>
-            <View style={styles.boton}>
-              <Button title="Cerrar"
-                onPress={cerrarSesion}
-              ></Button>
-            </View>
+            <Pressable style={styles.botonInicioSesion} onPress={pressIniciarSesion}>
+              <Text style={styles.iniciarSesion}>Iniciar sesión</Text>
+            </Pressable>
           </View>
           <View style={styles.contenedorBotonesRedes}>
             <View style={styles.botonRedes}>
               <Text style={styles.texto}>No esta registrado?</Text>
             </View>
             <View style={styles.botonRedes}>
-              <Button
-                title="Registrese aquí" color="#ed7731"
-                onPress={() => navigation.replace('Registro')}
-              />
+              <Pressable onPress={() => navigation.replace('Registro')}>
+                <Text style={styles.texto}>Registrese aquí</Text>
+              </Pressable>
             </View>
           </View>
         </View>
@@ -162,7 +150,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   contenedorBotonesRedes:{
-    flex:2,
+    flex: 2,
     padding: 10,
     justifyContent:"space-evenly",
     flexDirection: "column",
@@ -176,21 +164,34 @@ const styles = StyleSheet.create({
   botonRedes:{
     flex:1,
     alignItems:"stretch",
-    margin:5,
+    margin: 5,
   },
   entradas:{
     fontFamily: 'montserrat-semibold',
     flex:1,
     alignItems:"stretch",
-    margin:10,
-    padding:10,
+    margin: 10,
+    padding: 10,
     fontSize: 20,
     fontWeight:"400",
     color: "#495057",
     backgroundColor:"#fff",
-    borderWidth:1,
-    borderStyle:"solid",
+    borderWidth: 1,
+    borderStyle: "solid",
     borderColor: "#ced4da",
     borderRadius: 15,
+  },
+  botonInicioSesion:{
+    backgroundColor: '#ed7731', 
+    marginLeft:10,
+    marginRight:10,
+    justifyContent: 'center',
+    padding: 10,
+    borderRadius: 5
+  },
+  iniciarSesion:{
+    color: '#072C50',
+    fontFamily: 'montserrat-bold',
+    fontSize: 24,
   }
 });

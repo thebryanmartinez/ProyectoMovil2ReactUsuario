@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Alert, TextInput, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 export default function App({ navigation }) {
   const [nombre_completo, setNombre_Completo]= useState(null);
   const [contrasena_encriptada, setContrasena_Encriptada]= useState(null);
@@ -38,6 +37,7 @@ export default function App({ navigation }) {
             direccion_usuario: direccion_usuario
           })
         });
+        Alert.alert('Prometheus', 'Usuario ingresado correctamente');
       } catch (error) {
         console.error(error);
       }
@@ -74,11 +74,11 @@ export default function App({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    fondo: {
-        backgroundColor: '#072C50',
-        width:"100%",
-        height:"100%"
-    },
+  fondo: {
+      backgroundColor: '#072C50',
+      width:"100%",
+      height:"100%",
+  },
     container: {
     margin: 20,
     backgroundColor: '#072C50'
