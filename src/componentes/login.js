@@ -169,19 +169,19 @@ const styles = StyleSheet.create({
     padding:10,
   },
   texto:{
+    fontFamily: 'montserrat-bold',
     color: "#ed7731" ,
     fontSize: 18,
-    fontWeight: "600",
     textAlign: "center"
   },
   tituloLogin: {
     color: "#ed7731" ,
+    fontFamily: 'montserrat-bold',
     fontSize: 40,
     fontWeight: "600"
     },
   controles:{
     flex:4,
-    //backgroundColor: "#29291f",
     marginBottom: 10,
     paddingTop:10,
     paddingLeft:10,
@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
     margin:5,
   },
   entradas:{
+    fontFamily: 'montserrat-semibold',
     flex:1,
     alignItems:"stretch",
     margin:10,

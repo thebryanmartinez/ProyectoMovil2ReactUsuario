@@ -1,14 +1,29 @@
-import React from 'react';
-import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import Login from './src/componentes/login';
-import Registro from './src/componentes/registro';
-import Menu from './src/componentes/menu'
+import React, { useState } from 'react';
+import * as Font from 'expo-font'
+import Menu from './src/componentes/menu';
+import AppLoading from 'expo-app-loading';
+
+const getFonts = () => Font.loadAsync({
+    'montserrat-regular': require('./assets/fonts/Montserrat-Regular.ttf'),
+    'montserrat-bold': require('./assets/fonts/Montserrat-Bold.ttf'),
+    'montserrat-semibold': require('./assets/fonts/Montserrat-SemiBold.ttf')
+  });
 
 export default function App() {
-  const [usuario, setUsuario]= useState(null);
-  return (
-    <Menu></Menu>
-  );
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  if(fontsLoaded){
+    return (
+      <Menu/>
+    );
+  } else {
+    return (
+      <AppLoading
+        startAsync={getFonts}
+        onFinish={() => setFontsLoaded(true)}
+        onError={console.warn}
+      />
+    )
+  }
+  
 }

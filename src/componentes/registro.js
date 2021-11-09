@@ -73,7 +73,7 @@ export default function App({ navigation }) {
                 <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
                     <Text style={styles.tituloBotones}>Cancelar</Text>
                 </Pressable>
-                <Pressable style={styles.botones}  title="Ingresar" /* onPress={pressCrearUsuario} */>
+                <Pressable style={styles.botones}  title="Ingresar" onPress={pressCrearUsuario} >
                     <Text style={styles.tituloBotones}>Ingresar</Text>
                 </Pressable>
             </View>
