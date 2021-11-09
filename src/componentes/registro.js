@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Alert, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export default function App({ navigation }) {
   const [nombre_completo, setNombre_Completo]= useState(null);
   const [contrasena_encriptada, setContrasena_Encriptada]= useState(null);
@@ -19,34 +20,26 @@ export default function App({ navigation }) {
     }
     else{
       try {
-        const response = await fetch('http://192.168.1.165:3001/api/usuarios', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
+        var cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
+        var token = cliente.token;
+
+        const response = await fetch('http://192.168.0.12:3001/api/usuarios', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token,
+                
+            },
           body: JSON.stringify({
             nombre_completo: nombre_completo,
             contrasena_encriptada: contrasena_encriptada,
             nombre_usuario: nombre_usuario,
-            contrasena_encriptada: contrasena,
             correo: correo,
             telefono: telefono,
             direccion_usuario: direccion_usuario
           })
         });
-        const json = await response.json();
-        console.log(json);
-        if(json.data.length==0){
-          console.log(json.msj);
-          Alert.alert("Prometheus", json.msj);
-        }
-        else{
-          const cliente=JSON.stringify(json.data);
-          await AsyncStorage.setItem('cliente', cliente);
-          console.log(json.msj);
-          Alert.alert("Prometheus", json.msj);
-        }
       } catch (error) {
         console.error(error);
       }
@@ -58,17 +51,17 @@ export default function App({ navigation }) {
         <View style={styles.container}>
             <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
             <Text style={styles.texto}>Nombre completo: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Nombre completo'></TextInput>
+            <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo'></TextInput>
             <Text style={styles.texto}>Nombre de usuario: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Nombre de usuario'></TextInput>
+            <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario'></TextInput>
             <Text style={styles.texto}>Contraseña: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Contraseña'></TextInput>
+            <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña'></TextInput>
             <Text style={styles.texto}>Correo electronico: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Correo electronico'></TextInput>
+            <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico'></TextInput>
             <Text style={styles.texto}>Telefono: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Telefono'></TextInput>
+            <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono'></TextInput>
             <Text style={styles.texto}>Direccion domiciliaria: </Text>
-            <TextInput style={styles.entradaArea} maxLength={255} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
+            <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
             <View style={styles.contenedorBotones}>
                 <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
                     <Text style={styles.tituloBotones}>Cancelar</Text>
@@ -79,7 +72,7 @@ export default function App({ navigation }) {
             </View>
         </View>
     </View>
-  );
+  );    
 }
 
 const styles = StyleSheet.create({

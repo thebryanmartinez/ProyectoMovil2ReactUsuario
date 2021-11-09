@@ -9,9 +9,10 @@
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.0",
-    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-native-async-storage/async-storage": "^1.15.11",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "AsyncStorage": "^0.1.5",
     "expo": "~43.0.0",
     "expo-font": "~10.0.3",
     "expo-status-bar": "~1.1.0",
