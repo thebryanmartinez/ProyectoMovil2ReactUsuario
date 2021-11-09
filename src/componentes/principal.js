@@ -66,6 +66,9 @@ export default function App({ navigation }) {
             <View style={styles.container}>
             <View style={styles.header}>
                     <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
+                    <Pressable onPress={() => navigation.replace('Login')}>
+                        <Image source={require('../../assets/img/exit.png')}/>
+                    </Pressable>
                 </View>
             <ScrollView>
                 <View style={styles.main}>
@@ -91,13 +94,13 @@ export default function App({ navigation }) {
                 </View>
             </ScrollView>
             <View style={styles.footer}> 
-                <Pressable onPress={() => navigation.replace('Login')}>
+                <Pressable onPress={() => navigation.replace('Principal')}>
                     <Image source={require('../../assets/img/home.png')}/>
                 </Pressable>
-                <Pressable>
+                <Pressable onPress={() => navigation.replace('Producto')}>
                     <Image source={require('../../assets/img/search.png')}/>
                 </Pressable>
-                <Pressable onPress={() => navigation.replace('Producto')}>
+                <Pressable >
                 <Image source={require('../../assets/img/user.png')}/>
                 </Pressable>
             </View>
@@ -118,7 +121,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#072C50'
     },
     header: {
-        padding: 20,
+        display: 'flex',
+        padding: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         textAlign: 'left',
         backgroundColor: '#154472'
     },
@@ -129,7 +135,7 @@ const styles = StyleSheet.create({
     footer:{
         display: 'flex',
         backgroundColor: '#ed7731',
-        padding: 20,
+        padding: 10,
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
