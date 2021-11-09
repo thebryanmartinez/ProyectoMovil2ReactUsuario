@@ -8,6 +8,7 @@ export default function login({ navigation }) {
   const [usuario, setUsuario]= useState(null);
   const [contrasena, setContrasena]= useState(null);
   const [focusNombre, setFocusNombre]= useState(false);
+
   const presIniciarSesion = async () => {
     if(!usuario || !contrasena){
       console.log("Debe escribir los datos completos");
@@ -126,9 +127,9 @@ export default function login({ navigation }) {
               <Text style={styles.texto}>No esta registrado?</Text>
             </View>
             <View style={styles.botonRedes}>
-              <Button 
+              <Button
                 title="Registrese aquí" color="#ed7731"
-                onPress={() => navigation.navigate('Registro')}
+                onPress={() => navigation.replace('Registro')}
               />
             </View>
           </View>

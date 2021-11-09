@@ -9,15 +9,8 @@ const Stack = createNativeStackNavigator();
 export default function menu(){
     return(
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Login" component={login} options= {({ navigation }) => ({
-                    headerRight: () => (
-                        <Button onPress={() => navigation.navigate('Login')}title="Iniciar sesion" />
-
-
-                    ),
-                })}
-                />
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Screen name="Login" component={login} />
                 <Stack.Screen name="Registro" component={registro} />
             </Stack.Navigator>
         </NavigationContainer>

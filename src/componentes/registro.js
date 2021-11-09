@@ -1,9 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Alert, SafeAreaView, Button, TextInput, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function App() {
+export default function App({ navigation }) {
+  const [nombre_completo, setNombre_Completo]= useState(null);
+  const [contrasena_encriptada, setContrasena_Encriptada]= useState(null);
+  const [nombre_usuario, setNombre_Usuario]= useState(null);
+  const [correo, setCorreo]= useState(null);
+  const [telefono, setTelefono]= useState(null);
+  const [direccion_usuario, setDireccion_Usuario]= useState(false);
+
+  const pressCrearUsuario = async () => {
+    if(!nombre_completo || !contrasena_encriptada || !nombre_usuario || !correo || !telefono || !direccion_usuario){
+      console.log("Debe escribir los datos completos");
+      Alert.alert("Prometheus", "Debe escribir los datos completos");
+    }
+    else{
+      try {
+        const response = await fetch('http://192.168.1.165:3001/api/usuarios', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            nombre_completo: nombre_completo,
+            contrasena_encriptada: contrasena_encriptada,
+            nombre_usuario: nombre_usuario,
+            contrasena_encriptada: contrasena,
+            correo: correo,
+            telefono: telefono,
+            direccion_usuario: direccion_usuario
+          })
+        });
+        const json = await response.json();
+        console.log(json);
+        if(json.data.length==0){
+          console.log(json.msj);
+          Alert.alert("Prometheus", json.msj);
+        }
+        else{
+          const cliente=JSON.stringify(json.data);
+          await AsyncStorage.setItem('cliente', cliente);
+          console.log(json.msj);
+          Alert.alert("Prometheus", json.msj);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <View style={styles.fondo}>
@@ -22,10 +70,10 @@ export default function App() {
             <Text style={styles.texto}>Direccion domiciliaria: </Text>
             <TextInput style={styles.entradaArea} maxLength={255} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
             <View style={styles.contenedorBotones}>
-                <Pressable style={styles.botones} title="Cancelar">
+                <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
                     <Text style={styles.tituloBotones}>Cancelar</Text>
                 </Pressable>
-                <Pressable style={styles.botones}  title="Ingresar">
+                <Pressable style={styles.botones}  title="Ingresar" onPress={pressCrearUsuario}>
                     <Text style={styles.tituloBotones}>Ingresar</Text>
                 </Pressable>
             </View>
