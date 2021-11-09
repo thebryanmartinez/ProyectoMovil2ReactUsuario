@@ -16,7 +16,7 @@ export default function login({ navigation }) {
     }
     else{
       try {
-        const response = await fetch('http://192.168.0.12:3001/api/autenticacion/iniciosesion/', {
+        const response = await fetch('http://192.168.1.165:3001/api/autenticacion/iniciosesion/', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -54,7 +54,7 @@ export default function login({ navigation }) {
       var token = cliente.token;
       console.log('Bearer ' + token)
       try {
-        const response = await fetch('http://192.168.0.12:3001/api/productos/listar', {
+        const response = await fetch('http://192.168.1.165:3001/api/productos/listar', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
