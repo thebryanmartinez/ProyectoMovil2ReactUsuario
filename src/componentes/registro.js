@@ -19,7 +19,7 @@ export default function App({ navigation }) {
     }
     else{
       try {
-        const response = await fetch('http://192.168.1.165:3001/api/usuarios', {
+        const response = await fetch('http://192.168.0.12:3001/api/usuarios', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -58,17 +58,17 @@ export default function App({ navigation }) {
         <View style={styles.container}>
             <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
             <Text style={styles.texto}>Nombre completo: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Nombre completo'></TextInput>
+            <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo'></TextInput>
             <Text style={styles.texto}>Nombre de usuario: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Nombre de usuario'></TextInput>
+            <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario'></TextInput>
             <Text style={styles.texto}>Contraseña: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Contraseña'></TextInput>
+            <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña'></TextInput>
             <Text style={styles.texto}>Correo electronico: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Correo electronico'></TextInput>
+            <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico'></TextInput>
             <Text style={styles.texto}>Telefono: </Text>
-            <TextInput style={styles.entradaTexto} placeholder='Telefono'></TextInput>
+            <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono'></TextInput>
             <Text style={styles.texto}>Direccion domiciliaria: </Text>
-            <TextInput style={styles.entradaArea} maxLength={255} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
+            <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
             <View style={styles.contenedorBotones}>
                 <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
                     <Text style={styles.tituloBotones}>Cancelar</Text>
@@ -79,7 +79,7 @@ export default function App({ navigation }) {
             </View>
         </View>
     </View>
-  );
+  );    
 }
 
 const styles = StyleSheet.create({
