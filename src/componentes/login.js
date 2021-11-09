@@ -1,6 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState }from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -44,37 +42,7 @@ export default function login({ navigation }) {
       }
     }
   };
-  const verAlmacenamiento = async () => {
-    var cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
-    if(!cliente){
-      console.log("Usuario no autenticado");
-      Alert.alert("Prometheus", "Usuario no autenticado");
-    }
-    else{
-      var token = cliente.token;
-      console.log('Bearer ' + token)
-      try {
-        const response = await fetch('http://192.168.1.165:3001/api/productos/listar', {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-          }
-        });
-        const json = await response.json();
-        console.log(json);
-        if(json.data.length==0){
-          Alert.alert("Prometheus", json.msj);
-        }
-        else{
-          Alert.alert("Prometheus", json.msj);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
+
   const cerrarSesion = async () =>{
     await AsyncStorage.removeItem('cliente');
     console.log("Sesion Cerrada");
@@ -113,12 +81,12 @@ export default function login({ navigation }) {
           <View style={styles.contenedorBotones}>
             <View style={styles.boton}>
               <Button title="Iniciar Sesión"
-                onPress={presIniciarSesion}
+                onPress={() => navigation.replace('Principal')}
               ></Button>
             </View>
             <View style={styles.boton}>
               <Button title="Cerrar"
-                onPress={verAlmacenamiento}
+                onPress={cerrarSesion}
               ></Button>
             </View>
           </View>

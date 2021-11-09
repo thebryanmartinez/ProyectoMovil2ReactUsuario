@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Alert, TextInput, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, Pressable, FlatList} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 export default function App({ navigation }) {
-  const [nombre_completo, setNombre_Completo]= useState(null);
+ /* const [nombre_completo, setNombre_Completo]= useState(null);
   const [contrasena_encriptada, setContrasena_Encriptada]= useState(null);
   const [nombre_usuario, setNombre_Usuario]= useState(null);
   const [correo, setCorreo]= useState(null);
   const [telefono, setTelefono]= useState(null);
   const [direccion_usuario, setDireccion_Usuario]= useState(false);
-
+  
   const pressCrearUsuario = async () => {
     if(!nombre_completo || !contrasena_encriptada || !nombre_usuario || !correo || !telefono || !direccion_usuario){
       console.log("Debe escribir los datos completos");
@@ -43,31 +42,53 @@ export default function App({ navigation }) {
       }
     }
   };
-
+*/
+  const [info, setInfo] = useState([]);
+  const [ejecucion, setEjecucion] = useState(null);
+  
+  const verAlmacenamiento = async () => {
+    var cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
+    if(!cliente){
+      console.log("Usuario no autenticado");
+      Alert.alert("Prometheus", "Usuario no autenticado");
+    }
+    else{
+      var token = cliente.token;
+      console.log('Bearer ' + token)
+      try {
+        const response = await fetch('http://192.168.1.165:3001/api/productos/listar', {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,
+          }
+        });
+        const json = await response.json();
+        console.log(json);
+        JSON.stringify(json);
+        var mydata = JSON.parse(json);
+        alert(mydata[3].idproducto); 
+        alert(mydata[6].nombre_producto);
+        if(json.data.length==0){
+          Alert.alert("Prometheus", json.msj);
+        }
+        else{
+          Alert.alert("Prometheus", json.msj);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  
   return (
     <View style={styles.fondo}>
         <View style={styles.container}>
-            <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
-            <Text style={styles.texto}>Nombre completo: </Text>
-            <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo'></TextInput>
-            <Text style={styles.texto}>Nombre de usuario: </Text>
-            <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario'></TextInput>
-            <Text style={styles.texto}>Contraseña: </Text>
-            <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña'></TextInput>
-            <Text style={styles.texto}>Correo electronico: </Text>
-            <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico'></TextInput>
-            <Text style={styles.texto}>Telefono: </Text>
-            <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono'></TextInput>
-            <Text style={styles.texto}>Direccion domiciliaria: </Text>
-            <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
-            <View style={styles.contenedorBotones}>
-                <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
-                    <Text style={styles.tituloBotones}>Cancelar</Text>
-                </Pressable>
-                <Pressable style={styles.botones}  title="Ingresar" onPress={pressCrearUsuario} >
-                    <Text style={styles.tituloBotones}>Ingresar</Text>
-                </Pressable>
-            </View>
+            <Text styles={styles.texto}>Hola</Text>
+            <Pressable onPress={verAlmacenamiento}>
+                <Text>HOLA</Text>
+            </Pressable>
         </View>
     </View>
   );    
@@ -81,7 +102,7 @@ const styles = StyleSheet.create({
     },
     container: {
     margin: 20,
-    backgroundColor: '#072C50'
+    backgroundColor: 'red'
   },
   tituloPrometheus: {
       color: "#ed7731",
