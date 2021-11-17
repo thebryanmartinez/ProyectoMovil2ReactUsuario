@@ -36,7 +36,7 @@ export default function App({ navigation }) {
         </View>
       </SafeAreaView>
     </View>
-  );    
+  );
 }
 
 const styles = StyleSheet.create({

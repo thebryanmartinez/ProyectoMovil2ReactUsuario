@@ -65,7 +65,7 @@ export default function App({ navigation }) {
           <Pressable onPress={() => navigation.replace('Producto')}>
               <Image source={require('../../assets/img/search.png')}/>
           </Pressable>
-          <Pressable >
+          <Pressable onPress={() => navigation.replace('Usuarios')}>
             <Image source={require('../../assets/img/user.png')}/>
           </Pressable>
         </View>

@@ -56,7 +56,7 @@ export default function App({ navigation }) {
             <Pressable onPress={() => navigation.replace('Producto')}>
                 <Image source={require('../../assets/img/search.png')}/>
             </Pressable>
-            <Pressable >
+            <Pressable onPress={() => navigation.replace('Usuarios')}>
             <Image source={require('../../assets/img/user.png')}/>
             </Pressable>
         </View>
@@ -67,33 +67,33 @@ export default function App({ navigation }) {
 
 const styles = StyleSheet.create({
     fondo: {
-        backgroundColor: '#072C50',
-        flex: 1,
+      backgroundColor: '#072C50',
+      flex: 1,
     },
     container: {
-        flex: 1,
-        marginTop: StatusBar.currentHeight,
-        backgroundColor: '#072C50'
+      flex: 1,
+      marginTop: StatusBar.currentHeight,
+      backgroundColor: '#072C50'
     },
     header: {
-        display: 'flex',
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        textAlign: 'left',
-        backgroundColor: '#154472'
+      display: 'flex',
+      padding: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      textAlign: 'left',
+      backgroundColor: '#154472'
     },
     main:{
-        display: 'flex',
-        marginTop: 25, 
-        margin: 20,
+      display: 'flex',
+      marginTop: 25, 
+      margin: 20,
     },
     footer:{
-        display: 'flex',
-        backgroundColor: '#ed7731',
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
+      display: 'flex',
+      backgroundColor: '#ed7731',
+      padding: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
     },
     tituloPrometheus: {
       color: "#ed7731",
@@ -115,41 +115,41 @@ const styles = StyleSheet.create({
       marginBottom: 10
     },
     contenedorBotones: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
     },
     botones: {
-        marginTop: 10,
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderRadius: 5,
-        backgroundColor: '#ed7731',
-        justifyContent: 'center',
-        alignItems: 'center',
+      marginTop: 10,
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 30,
+      paddingRight: 30,
+      borderRadius: 5,
+      backgroundColor: '#ed7731',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     tituloBotones: {
-    color: "#072C50",
-    fontSize: 26,
-    fontWeight: "700",
+      color: "#072C50",
+      fontSize: 26,
+      fontWeight: "700",
     },
     entradaTexto: {
-        backgroundColor: '#fff',
-        fontFamily: 'montserrat-semibold',
-        height: 32,
-        marginTop: 10,
-        marginBottom: 10,
-        paddingLeft: 5,
+      backgroundColor: '#fff',
+      fontFamily: 'montserrat-semibold',
+      height: 32,
+      marginTop: 10,
+      marginBottom: 10,
+      paddingLeft: 5,
     },
     entradaArea: {
-        backgroundColor: '#fff',
-        fontFamily: 'montserrat-semibold',
-        height: 80,
-        marginTop: 10,
-        marginBottom: 10,
-        paddingLeft: 5,
+      backgroundColor: '#fff',
+      fontFamily: 'montserrat-semibold',
+      height: 80,
+      marginTop: 10,
+      marginBottom: 10,
+      paddingLeft: 5,
     },
     contenedorBotones: {
       display: 'flex',
