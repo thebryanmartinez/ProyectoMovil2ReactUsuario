@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Pressable, FlatList, Image, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Pressable, FlatList, Image, ScrollView, StatusBar} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App({ navigation }) {
@@ -77,12 +77,10 @@ export default function App({ navigation }) {
 const styles = StyleSheet.create({
   fondo: {
       backgroundColor: '#072C50',
-      width:"100%",
-      height:"100%"
+      flex: 1,
   },
   container: {
     flex: 1,
-    marginTop: 25,
     backgroundColor: '#072C50'
   },
   header: {

@@ -5,16 +5,20 @@ import login from './login';
 import registro from './registro';
 import principal from './principal';
 import producto from './productos';
+import usuarios from './usuarios';
+import tarjetas from './tarjetas'
 
 const Stack = createNativeStackNavigator();
 export default function menu(){
     return(
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Screen name="Tarjetas" component={tarjetas} />
+                <Stack.Screen name="Principal" component={principal} />
                 <Stack.Screen name="Login" component={login} />
                 <Stack.Screen name="Registro" component={registro} />
-                <Stack.Screen name="Principal" component={principal} />
                 <Stack.Screen name="Producto" component={producto} />
+                <Stack.Screen name="Usuarios" component={usuarios} />
             </Stack.Navigator>
         </NavigationContainer>
     )

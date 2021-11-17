@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Alert, TextInput, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, Pressable, SafeAreaView, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App({ navigation }) {
@@ -25,9 +25,9 @@ export default function App({ navigation }) {
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token,
-                
+                    'Authorization': 'Bearer ' + token, 
             },
+
           body: JSON.stringify({
             nombre_completo: nombre_completo,
             contrasena_encriptada: contrasena_encriptada,
@@ -45,21 +45,23 @@ export default function App({ navigation }) {
   };
 
   return (
-    <View style={styles.fondo}>
-        <View style={styles.container}>
-            <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
-            <Text style={styles.texto}>Nombre completo: </Text>
-            <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo'></TextInput>
-            <Text style={styles.texto}>Nombre de usuario: </Text>
-            <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario'></TextInput>
-            <Text style={styles.texto}>Contraseña: </Text>
-            <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña'></TextInput>
-            <Text style={styles.texto}>Correo electronico: </Text>
-            <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico'></TextInput>
-            <Text style={styles.texto}>Telefono: </Text>
-            <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono'></TextInput>
-            <Text style={styles.texto}>Direccion domiciliaria: </Text>
-            <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
+    <SafeAreaView style={styles.fondo}>
+        <ScrollView style={styles.container}>
+            <View style={styles.main}>
+              <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
+              <Text style={styles.texto}>Nombre completo: </Text>
+              <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo'></TextInput>
+              <Text style={styles.texto}>Nombre de usuario: </Text>
+              <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario'></TextInput>
+              <Text style={styles.texto}>Contraseña: </Text>
+              <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña'></TextInput>
+              <Text style={styles.texto}>Correo electronico: </Text>
+              <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico'></TextInput>
+              <Text style={styles.texto}>Telefono: </Text>
+              <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono'></TextInput>
+              <Text style={styles.texto}>Direccion domiciliaria: </Text>
+              <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
+            </View> 
             <View style={styles.contenedorBotones}>
                 <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
                     <Text style={styles.tituloBotones}>Cancelar</Text>
@@ -68,20 +70,23 @@ export default function App({ navigation }) {
                     <Text style={styles.tituloBotones}>Ingresar</Text>
                 </Pressable>
             </View>
-        </View>
-    </View>
+        </ScrollView>
+    </SafeAreaView>
   );    
 }
 
 const styles = StyleSheet.create({
   fondo: {
       backgroundColor: '#072C50',
-      width:"100%",
-      height:"100%",
+      flex: 1
   },
-    container: {
+  container: {
+    flex: 1,
     margin: 20,
     backgroundColor: '#072C50'
+  },
+  main:{
+    display: 'flex',
   },
   tituloPrometheus: {
       color: "#ed7731",
@@ -100,14 +105,16 @@ const styles = StyleSheet.create({
       fontFamily: 'montserrat-semibold',
       height: 32,
       marginTop: 10,
-      marginBottom: 10
+      marginBottom: 10,
+      paddingLeft: 5,
   },
   entradaArea: {
       backgroundColor: '#fff',
       fontFamily: 'montserrat-semibold',
       height: 80,
       marginTop: 10,
-      marginBottom: 10
+      marginBottom: 10,
+      paddingLeft: 5,
   },
   contenedorBotones: {
     display: 'flex',

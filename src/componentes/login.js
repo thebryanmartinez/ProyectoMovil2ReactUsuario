@@ -1,5 +1,5 @@
 import React, { useState }from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Alert, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, Pressable, StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function login({ navigation }) {

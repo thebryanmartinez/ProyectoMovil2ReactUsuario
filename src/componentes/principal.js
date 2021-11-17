@@ -1,57 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable, SectionList, ListItem, FlatList, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
-
 
 export default function App({ navigation }) {
-
-  const SECTIONS = [
-      {
-          title: "Made for you",
-          data: [
-              {
-                key: "1",
-                text: "Item text 1",
-                uri: "https://picsum.photos/id/1/200",    
-              },
-              {
-                key: "2",
-                text: "Item text 2",
-                uri: "https://picsum.photos/id/10/200",    
-              },
-          ]
-      }
-  ];
+  const cerrarSesion = async () =>{
+    await AsyncStorage.removeItem('cliente');
+    console.log("Sesion Cerrada");
+    Alert.alert("Prometheus", "Sesion Cerrada");
+  };
   
-    const [info, setinfo] = useState([]);
-    const [ejecucion, setEjecucion] = useState(null);
-
-    if(ejecucion==null){
-      try {
-          const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
-          .then((response) => response.json())
-          .then((json) => {
-              setinfo(json);
-              console.log(json);
-          });
-          setEjecucion(false);
-      } 
-      catch (error) {
-          setEjecucion(false);
-          console.error(error);
-      }
-    };
-
-    const cerrarSesion = async () =>{
-      await AsyncStorage.removeItem('cliente');
-      console.log("Sesion Cerrada");
-      Alert.alert("Prometheus", "Sesion Cerrada");
-    };
-
   return (
     <View style={styles.fondo}>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.header}>
             <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
             <Pressable onPress={() => navigation.replace('Login')}>
@@ -70,11 +30,11 @@ export default function App({ navigation }) {
             <Pressable onPress={() => navigation.replace('Producto')}>
                 <Image source={require('../../assets/img/search.png')}/>
             </Pressable>
-            <Pressable >
+            <Pressable onPress={() => navigation.replace('Usuarios')}>
             <Image source={require('../../assets/img/user.png')}/>
             </Pressable>
         </View>
-      </View>
+      </SafeAreaView>
     </View>
   );    
 }
@@ -82,12 +42,11 @@ export default function App({ navigation }) {
 const styles = StyleSheet.create({
     fondo: {
         backgroundColor: '#072C50',
-        width:"100%",
-        height:"100%"
+        flex: 1,
     },
     container: {
         flex: 1,
-        marginTop: 20,
+        marginTop: StatusBar.currentHeight,
         backgroundColor: '#072C50'
     },
     header: {
