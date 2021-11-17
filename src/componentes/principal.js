@@ -1,35 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {Dropdown, DropdownItem, DropdownMenu,DropdownToggle} from 'reactstrap';
 
-function App(){
-  const[dropdown, setDropdown]=useState(false);
 
-  const abrircerrarDropdown=()=>
-  {
-    setDropdown(!dropdown);
-  }
-  return
-  (
-    <div className= "App">
-     <Dropdown isOpen={dropdown} toggle={abrircerrarDropdown}> 
-       <DropdownToggle>
-         Ejemplo
-       </DropdownToggle>
-
-       <DropdownMenu>
-       <DropdownItem>Accion 1</DropdownItem>
-       <DropdownItem>Accion 2</DropdownItem>
-       <DropdownItem>Accion 3</DropdownItem>
-       </DropdownMenu>
-
-     </Dropdown> 
-    </div>
-  );
-}
-export default App;
 
 export default function App({ navigation }) {
   const cerrarSesion = async () =>{
