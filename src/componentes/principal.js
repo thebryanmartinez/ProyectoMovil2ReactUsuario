@@ -48,33 +48,33 @@ export default function App({ navigation }) {
 
 const styles = StyleSheet.create({
     fondo: {
-        backgroundColor: '#072C50',
-        flex: 1,
+      backgroundColor: '#072C50',
+      flex: 1,
     },
     container: {
-        flex: 1,
-        marginTop: StatusBar.currentHeight,
-        backgroundColor: '#072C50'
+      flex: 1,
+      marginTop: StatusBar.currentHeight,
+      backgroundColor: '#072C50'
     },
     header: {
-        display: 'flex',
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        textAlign: 'left',
-        backgroundColor: '#154472'
+      display: 'flex',
+      padding: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      textAlign: 'left',
+      backgroundColor: '#154472'
     },
     main:{
-        display: 'flex',
-        marginTop: 25, 
-        marginLeft: 20,
+      display: 'flex',
+      marginTop: 25, 
+      marginLeft: 20,
     },
     footer:{
-        display: 'flex',
-        backgroundColor: '#ed7731',
-        padding: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
+      display: 'flex',
+      backgroundColor: '#ed7731',
+      padding: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
     },
     tituloPrometheus: {
       color: "#ed7731",

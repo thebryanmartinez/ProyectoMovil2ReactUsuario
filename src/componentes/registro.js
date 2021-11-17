@@ -77,8 +77,8 @@ export default function App({ navigation }) {
 
 const styles = StyleSheet.create({
   fondo: {
-      backgroundColor: '#072C50',
-      flex: 1
+    backgroundColor: '#072C50',
+    flex: 1
   },
   container: {
     flex: 1,
@@ -89,32 +89,32 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   tituloPrometheus: {
-      color: "#ed7731",
-      fontSize: 40,
-      textAlign: 'center',
-      fontFamily: 'montserrat-bold'
+    color: "#ed7731",
+    fontSize: 40,
+    textAlign: 'center',
+    fontFamily: 'montserrat-bold'
   },
   texto: {
-      textAlign: 'left',
-      color: "#ed7731",
-      fontSize: 24,
-      fontFamily: 'montserrat-bold'
+    textAlign: 'left',
+    color: "#ed7731",
+    fontSize: 24,
+    fontFamily: 'montserrat-bold'
   },
   entradaTexto: {
-      backgroundColor: '#fff',
-      fontFamily: 'montserrat-semibold',
-      height: 32,
-      marginTop: 10,
-      marginBottom: 10,
-      paddingLeft: 5,
+    backgroundColor: '#fff',
+    fontFamily: 'montserrat-semibold',
+    height: 32,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingLeft: 5,
   },
   entradaArea: {
-      backgroundColor: '#fff',
-      fontFamily: 'montserrat-semibold',
-      height: 80,
-      marginTop: 10,
-      marginBottom: 10,
-      paddingLeft: 5,
+    backgroundColor: '#fff',
+    fontFamily: 'montserrat-semibold',
+    height: 80,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingLeft: 5,
   },
   contenedorBotones: {
     display: 'flex',
@@ -122,13 +122,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   botones: {
-      marginTop: 10,
-      paddingTop: 5,
-      paddingBottom: 5,
-      paddingLeft: 30,
-      paddingRight: 30,
-      borderRadius: 5,
-      backgroundColor: '#ed7731',
+    marginTop: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 30,
+    paddingRight: 30,
+    borderRadius: 5,
+    backgroundColor: '#ed7731',
   },
   tituloBotones: {
     color: "#072C50",

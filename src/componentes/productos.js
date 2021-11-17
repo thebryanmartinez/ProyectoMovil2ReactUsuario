@@ -76,8 +76,8 @@ export default function App({ navigation }) {
 
 const styles = StyleSheet.create({
   fondo: {
-      backgroundColor: '#072C50',
-      flex: 1,
+    backgroundColor: '#072C50',
+    flex: 1,
   },
   container: {
     flex: 1,
