@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-
 export default function App({ navigation }) {
   const cerrarSesion = async () =>{
     await AsyncStorage.removeItem('cliente');

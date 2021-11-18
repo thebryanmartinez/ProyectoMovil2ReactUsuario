@@ -47,20 +47,20 @@ export default function App({ navigation }) {
   return (
     <SafeAreaView style={styles.fondo}>
         <ScrollView style={styles.container}>
-            <View style={styles.main}>
-              <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
+            <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
+              <View style={styles.main}>
               <Text style={styles.texto}>Nombre completo: </Text>
-              <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo'></TextInput>
+              <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Nombre de usuario: </Text>
-              <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario'></TextInput>
+              <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Contraseña: </Text>
-              <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña'></TextInput>
+              <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Correo electronico: </Text>
-              <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico'></TextInput>
+              <TextInput style={styles.entradaTexto}  keyboardType='email-address' onChangeText={setCorreo} placeholder='Correo electronico' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Telefono: </Text>
-              <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono'></TextInput>
+              <TextInput style={styles.entradaTexto} keyboardType='number-pad' onChangeText={setTelefono} placeholder='Telefono' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Direccion domiciliaria: </Text>
-              <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
+              <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' placeholderTextColor="#ced4da" multiline={true} ></TextInput>
             </View> 
             <View style={styles.contenedorBotones}>
                 <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
@@ -86,10 +86,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#072C50'
   },
   main:{
+    marginTop: 40,
     display: 'flex',
   },
   tituloPrometheus: {
     color: "#ed7731",
+    marginTop: 20,
     fontSize: 40,
     textAlign: 'center',
     fontFamily: 'montserrat-bold'
@@ -101,20 +103,30 @@ const styles = StyleSheet.create({
     fontFamily: 'montserrat-bold'
   },
   entradaTexto: {
-    backgroundColor: '#fff',
     fontFamily: 'montserrat-semibold',
     height: 32,
+    fontSize: 20,
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 5,
+    fontFamily: 'montserrat-semibold',
+    color: "#495057",
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#ed7731",
+    color: '#ed7731',
   },
   entradaArea: {
-    backgroundColor: '#fff',
     fontFamily: 'montserrat-semibold',
-    height: 80,
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 5,
+    fontSize: 20,
+    color: "#495057",
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#ed7731",
+    color: '#ed7731',
   },
   contenedorBotones: {
     display: 'flex',

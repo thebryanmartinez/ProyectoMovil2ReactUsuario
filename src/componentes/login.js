@@ -1,5 +1,5 @@
 import React, { useState }from 'react';
-import { StyleSheet, Text, View, TextInput, Alert, Pressable, StatusBar} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Alert, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function login({ navigation }) {
@@ -10,7 +10,7 @@ export default function login({ navigation }) {
   const pressIniciarSesion = async () => {
     if(!usuario || !contrasena){
       console.log("Debe escribir los datos completos");
-      Alert.alert("Prometheus", "Debe Escribir los datos completos");
+      Alert.alert("Prometheus", "Debe escribir los datos completos");
     }
     else{
       try {
@@ -58,6 +58,7 @@ export default function login({ navigation }) {
               value={usuario}
               onChangeText={setUsuario}
               placeholder="Escriba el usuario o correo"
+              placeholderTextColor="#ced4da"
               style={styles.entradas}
               autoFocus={focusNombre}
             >
@@ -68,6 +69,7 @@ export default function login({ navigation }) {
               value={contrasena}
               onChangeText={setContrasena}
               placeholder="Escriba la contraseña"
+              placeholderTextColor="#ced4da"
               style={styles.entradas}
               passwordRules=""
               secureTextEntry={true}
@@ -85,7 +87,7 @@ export default function login({ navigation }) {
             </View>
             <View style={styles.botonRedes}>
               <Pressable onPress={() => navigation.replace('Registro')}>
-                <Text style={styles.texto}>Registrese aquí</Text>
+                <Text style={styles.texto, styles.registreseAqui} >Registrese aquí</Text>
               </Pressable>
             </View>
           </View>
@@ -168,23 +170,21 @@ const styles = StyleSheet.create({
   },
   entradas:{
     fontFamily: 'montserrat-semibold',
-    flex:1,
-    alignItems:"stretch",
+    flex: 1,
+    alignItems: "stretch",
     margin: 10,
     padding: 10,
     fontSize: 20,
-    fontWeight:"400",
     color: "#495057",
-    backgroundColor:"#fff",
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderStyle: "solid",
-    borderColor: "#ced4da",
-    borderRadius: 15,
+    borderColor: "#ed7731",
+    color: '#ed7731',
   },
   botonInicioSesion:{
     backgroundColor: '#ed7731', 
-    marginLeft:10,
-    marginRight:10,
+    marginLeft: 10,
+    marginRight: 10,
     justifyContent: 'center',
     padding: 10,
     borderRadius: 5
@@ -193,5 +193,13 @@ const styles = StyleSheet.create({
     color: '#072C50',
     fontFamily: 'montserrat-bold',
     fontSize: 24,
+  },
+  registreseAqui: {
+    fontFamily: 'montserrat-bold',
+    color: "#ed7731" ,
+    fontSize: 18,
+    textAlign: "center",
+    textDecorationLine: 'underline',
+    borderColor: '#ed7731',
   }
 });

@@ -10,12 +10,6 @@ export default function App({ navigation }) {
   const [correo, setCorreo]= useState(null);
   const [telefono, setTelefono]= useState(null);
   const [direccion_usuario, setDireccion_Usuario]= useState(false);
-
-  const cerrarSesion = async () =>{
-    await AsyncStorage.removeItem('cliente');
-    console.log("Sesion Cerrada");
-    Alert.alert("Prometheus", "Sesion Cerrada");
-  };
   
   return (
     <SafeAreaView style={styles.fondo}>

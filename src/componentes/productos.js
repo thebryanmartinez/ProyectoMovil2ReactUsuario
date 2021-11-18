@@ -65,31 +65,31 @@ export default function App({ navigation }) {
           <View style={styles.main}>
             <View>
             <FlatList
-                numColumns={2}
-                style={styles.productos}
-                data={info}
-                keyExtractor={(item) => item.idproductos}
-                renderItem={({item}) => {
-                    return(
-                        <View style={styles.contenedorFuera}>
-                          <View style={styles.contenedorDentro}>
-                            <View style={styles.contenedorImagen}>
-                              <Image source={require('../../assets/img/adidas3.jpg')} style={styles.imagen}/>
-                            </View>
-                            <View style={styles.contenedorInfo}>
-                          <Text style={styles.productoNombre}>{item.nombre_producto}</Text>                        
-                          <Text style={styles.productoMarca}>{item.marca_producto}</Text>      
-                          <Text style={styles.productoPrecio}>L. {item.costo}</Text>
-                            </View>
-                        </View>
-                            </View>
-                    )
-                  }
-                }
+              numColumns={2}
+              style={styles.productos}
+              data={info}
+              keyExtractor={(item) => item.idproductos}
+              renderItem={({item}) => {
+                return(
+                  <Pressable style={styles.contenedorFuera}>
+                    <View style={styles.contenedorDentro}>
+                      <View style={styles.contenedorImagen}>
+                        <Image source={require('../../assets/img/adidas3.jpg')} style={styles.imagen}/>
+                      </View>
+                      <View style={styles.contenedorInfo}>
+                        <Text style={styles.productoNombre}>{item.nombre_producto}</Text>                        
+                        <Text style={styles.productoMarca}>{item.marca_producto}</Text>      
+                        <Text style={styles.productoPrecio}>L. {item.costo}</Text>
+                      </View>
+                    </View>
+                  </Pressable>
+                )
+              }
+              }
             />
             </View>
           </View>
-          
+  
         <View style={styles.footer}> 
           <Pressable onPress={() => navigation.replace('Principal')}>
               <Image source={require('../../assets/img/home.png')}/>
