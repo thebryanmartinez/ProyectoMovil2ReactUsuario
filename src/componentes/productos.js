@@ -1,13 +1,42 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Pressable, FlatList, Image, ScrollView, StatusBar} from 'react-native';
+import { StyleSheet, Text, View, Pressable, FlatList, Image, TextInput, ScrollView} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
   const [ejecucion, setEjecucion] = useState(null);
+  const [search, setSearch] = useState('');
 
   if(ejecucion==null){
     try {
+      const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
+      .then((response) => response.json())
+      .then((json) => {
+          setinfo(json);
+          console.log(json);
+      });
+      setEjecucion(false);
+    } 
+    catch (error) {
+      setEjecucion(false);
+      console.error(error);
+    }
+  }
+
+  const searchFilter = (text) => {
+    if(text){
+      
+      const nuevaInfo = info.filter((item) => {
+        const itemData = item.nombre_producto ? item.nombre_producto.toUpperCase()
+        : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1; 
+      });
+      
+      setinfo(nuevaInfo);
+      setSearch(text);
+    } else {
+      try {
         const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
         .then((response) => response.json())
         .then((json) => {
@@ -15,10 +44,13 @@ export default function App({ navigation }) {
             console.log(json);
         });
         setEjecucion(false);
-    } 
-    catch (error) {
+      } 
+      catch (error) {
         setEjecucion(false);
         console.error(error);
+      }
+      setinfo(info);
+      setSearch(text);
     }
   }
 
@@ -26,13 +58,11 @@ export default function App({ navigation }) {
     <SafeAreaView style={styles.fondo}>
         <View style={styles.container}>
           <View style={styles.header}>
-              <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
-              <Pressable onPress={() => navigation.replace('Login')}>
-                  <Image source={require('../../assets/img/exit.png')}/>
-              </Pressable>
+              <Image source={require('../../assets/img/busqueda.png')}/>
+              <TextInput style={styles.busqueda} placeholder='Buscar producto' placeholderTextColor='#ed7731'
+               value={search} underlineColorAndroid="transparent" onChangeText={(text) => searchFilter(text)}/>
           </View>
           <View style={styles.main}>
-            
             <View>
             <FlatList
                 numColumns={2}
@@ -41,21 +71,23 @@ export default function App({ navigation }) {
                 keyExtractor={(item) => item.idproductos}
                 renderItem={({item}) => {
                     return(
-                        <View style={styles.contenedorInfo}>
-                          <Text style={styles.productosTexto}>Nombre: {item.nombre_producto}</Text>
-                          <Text style={styles.productosTexto}>Cantidad: {item.cantidad_producto}</Text>
-                          <Text style={styles.productosTexto}>Precio producto: {item.precio_producto}</Text>
-                          <Text style={styles.productosTexto}>Marca producto: {item.marca_producto}</Text>
-                          <Text style={styles.productosTexto}>categoria producto: {item.idcategorias}</Text>
-                          <Text style={styles.productosTexto}>Id talla: {item.idtallas}</Text>
-                          <Text style={styles.productosTexto}>Costo: {item.costo}</Text>
+                        <View style={styles.contenedorFuera}>
+                          <View style={styles.contenedorDentro}>
+                            <View style={styles.contenedorImagen}>
+                              <Image source={require('../../assets/img/adidas3.jpg')} style={styles.imagen}/>
+                            </View>
+                            <View style={styles.contenedorInfo}>
+                          <Text style={styles.productoNombre}>{item.nombre_producto}</Text>                        
+                          <Text style={styles.productoMarca}>{item.marca_producto}</Text>      
+                          <Text style={styles.productoPrecio}>L. {item.costo}</Text>
+                            </View>
                         </View>
+                            </View>
                     )
                   }
                 }
             />
             </View>
-            
           </View>
           
         <View style={styles.footer}> 
@@ -87,14 +119,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     padding: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     textAlign: 'left',
     backgroundColor: '#154472'
   },
   main:{
-    flex: 1,
-    marginTop: 20, 
-    marginLeft: 20,
+    flex: 1, 
   },
   footer:{
     display: 'flex',
@@ -113,14 +143,51 @@ const styles = StyleSheet.create({
     color: '#ed7731',
     fontSize: 18,
   },
-  contenedorInfo: {
-    marginRight: 10,
-    marginBottom: 20,
+  contenedorFuera: {
+    width: '50%',
+    borderWidth: 1,
+    borderColor: '#eee'
   },
   tituloPrometheus: {
     color: "#ed7731",
     fontSize: 24,
     textAlign: 'left',
+    fontFamily: 'montserrat-bold'
+  },
+  busqueda:{
+    fontSize: 18,
+    fontFamily: 'montserrat-semibold',
+    paddingLeft: 5,
+    width: '85%',
+    marginLeft: 10,
+  },
+  contenedorDentro: {
+    margin: 10,
+  },
+  contenedorImagen: {
+    flex: 1,
+  },
+  imagen: {
+    width: '100%',
+  },
+  productoNombre: {
+    textAlign: 'left',
+    color: "#ed7731",
+    fontSize: 18,
+    fontFamily: 'montserrat-semibold'
+  },
+  productoMarca: {
+    marginTop: 5,
+    textAlign: 'left',
+    color: "#ed7731",
+    fontSize: 18,
+    fontFamily: 'montserrat-semibold'
+  },
+  productoPrecio: {
+    marginTop: 15,
+    textAlign: 'left',
+    color: "#ed7731",
+    fontSize: 20,
     fontFamily: 'montserrat-bold'
   },
 });
