@@ -103,12 +103,20 @@ const styles = StyleSheet.create({
       fontFamily: 'montserrat-bold'
     },
     entradaTexto: {
-      backgroundColor: '#fff',
       fontFamily: 'montserrat-semibold',
       height: 32,
+      fontSize: 20,
       marginTop: 10,
-      marginBottom: 10
+      marginBottom: 10,
+      paddingLeft: 5,
+      fontFamily: 'montserrat-semibold',
+      color: "#495057",
+      borderBottomWidth: 1,
+      borderStyle: "solid",
+      borderColor: "#ed7731",
+      color: '#ed7731',
     },
+  
     contenedorBotones: {
       display: 'flex',
       flexDirection: 'row',

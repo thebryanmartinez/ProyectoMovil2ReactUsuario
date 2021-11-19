@@ -15,12 +15,14 @@ export default function App({ navigation }) {
         <View style={styles.header}>
             <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
             <View style={styles.headerbotones}>
-            <Pressable>
-                <Image source={require('../../assets/img/filtrar.png')}/>
-            </Pressable>
-            <Pressable onPress={() => navigation.replace('Login')}>
-                <Image source={require('../../assets/img/exit.png')}/>
-            </Pressable>
+              <View style={styles.contenedorBotones}>
+                <Pressable style={{marginRight: 10}}>
+                  <Image source={require('../../assets/img/filtrar.png')}/>
+                </Pressable>
+                <Pressable onPress={() => navigation.replace('Login')}>
+                  <Image source={require('../../assets/img/exit.png')}/>
+                </Pressable>
+              </View>
             </View>
           </View>
             <ScrollView style={styles.main}>
@@ -34,6 +36,9 @@ export default function App({ navigation }) {
             </Pressable>
             <Pressable onPress={() => navigation.replace('Producto')}>
                 <Image source={require('../../assets/img/search.png')}/>
+            </Pressable>
+            <Pressable onPress={() => navigation.replace('CarritoCompras')}>
+            <Image source={require('../../assets/img/shoppingcart.png')}/>
             </Pressable>
             <Pressable onPress={() => navigation.replace('Usuarios')}>
             <Image source={require('../../assets/img/user.png')}/>
@@ -92,5 +97,11 @@ const styles = StyleSheet.create({
     headerbotones: {
       display: 'flex',
       flexDirection: 'row',
+    },
+    contenedorBotones: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
     }
 });

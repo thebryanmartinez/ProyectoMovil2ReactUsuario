@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, Image, View, Pressable, SafeAreaView, StatusBar, ScrollView, TextInput } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App({ navigation }) {
 
@@ -15,24 +14,21 @@ export default function App({ navigation }) {
     <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
-            <Pressable onPress={() => navigation.replace('Login')}>
-                <Image source={require('../../assets/img/exit.png')}/>
-            </Pressable>
+            <Text style={styles.tituloPrometheus}>USUARIO</Text>
           </View>
             <ScrollView style={styles.main}>
               <Text style={styles.texto}>Nombre completo: </Text>
-              <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Nombre completo'></TextInput>
+              <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholderTextColor="#ced4da" placeholder='Nombre completo'></TextInput>
               <Text style={styles.texto}>Nombre de usuario: </Text>
-              <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario'></TextInput>
+              <TextInput style={styles.entradaTexto}  onChangeText={setNombre_Usuario} placeholder='Nombre de usuario' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Contraseña: </Text>
-              <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña'></TextInput>
+              <TextInput style={styles.entradaTexto}  onChangeText={setContrasena_Encriptada} placeholder='Contraseña' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Correo electronico: </Text>
-              <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico'></TextInput>
+              <TextInput style={styles.entradaTexto} onChangeText={setCorreo} placeholder='Correo electronico' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Telefono: </Text>
-              <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono'></TextInput>
+              <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Direccion domiciliaria: </Text>
-              <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' multiline={true} ></TextInput>
+              <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' placeholderTextColor="#ced4da" multiline={true} ></TextInput>
               <Pressable style={styles.botones}  title="Modificar">
                     <Text style={styles.tituloBotones}>Modificar</Text>
               </Pressable>
@@ -45,13 +41,16 @@ export default function App({ navigation }) {
             </ScrollView>
           <View style={styles.footer}> 
             <Pressable onPress={() => navigation.replace('Principal')}>
-                <Image source={require('../../assets/img/home.png')}/>
+              <Image source={require('../../assets/img/home.png')}/>
             </Pressable>
             <Pressable onPress={() => navigation.replace('Producto')}>
-                <Image source={require('../../assets/img/search.png')}/>
+              <Image source={require('../../assets/img/search.png')}/>
+            </Pressable>
+            <Pressable onPress={() => navigation.replace('CarritoCompras')}>
+              <Image source={require('../../assets/img/shoppingcart.png')}/>
             </Pressable>
             <Pressable onPress={() => navigation.replace('Usuarios')}>
-            <Image source={require('../../assets/img/user.png')}/>
+              <Image source={require('../../assets/img/user.png')}/>
             </Pressable>
         </View>
       </View>
@@ -130,20 +129,30 @@ const styles = StyleSheet.create({
       fontWeight: "700",
     },
     entradaTexto: {
-      backgroundColor: '#fff',
       fontFamily: 'montserrat-semibold',
       height: 32,
+      fontSize: 20,
       marginTop: 10,
       marginBottom: 10,
       paddingLeft: 5,
+      fontFamily: 'montserrat-semibold',
+      color: "#495057",
+      borderBottomWidth: 1,
+      borderStyle: "solid",
+      borderColor: "#ed7731",
+      color: '#ed7731',
     },
     entradaArea: {
-      backgroundColor: '#fff',
       fontFamily: 'montserrat-semibold',
-      height: 80,
       marginTop: 10,
       marginBottom: 10,
       paddingLeft: 5,
+      fontSize: 20,
+      color: "#495057",
+      borderBottomWidth: 1,
+      borderStyle: "solid",
+      borderColor: "#ed7731",
+      color: '#ed7731',
     },
     contenedorBotones: {
       display: 'flex',
