@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
   ScrollView,
+  Modal,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
@@ -43,7 +44,7 @@ export default function App({ navigation }) {
     <View style={styles.fondo}>
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.tituloPrometheus}>PROMETHEUS</Text>
+          <Text style={globalTyT.titulo}>PROMETHEUS</Text>
           <View style={styles.headerbotones}>
             <View style={styles.contenedorBotones}>
               <Pressable onPress={() => changeModalVisibility(true)} style={{ marginRight: 10 }}>
@@ -75,7 +76,7 @@ export default function App({ navigation }) {
         </ScrollView>
         <View>
           <LinearGradient
-            style={styles.footer}
+            style={globalFooter.footer}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             colors={['#E43E31', '#F4AA31']}

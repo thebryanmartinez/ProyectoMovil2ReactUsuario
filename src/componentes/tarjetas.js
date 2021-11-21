@@ -9,6 +9,7 @@ import {
   StatusBar,
   ScrollView,
   TextInput,
+  Button,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
@@ -50,8 +51,6 @@ export default function App({ navigation }) {
     Fecha = fecha;
     FechaFormato = Fecha.getFullYear() + "-" + (Fecha.getMonth() + 1) + "-" + Fecha.getDate();
     setchooseData(FechaFormato)
-
-
   }
 
   const showDatePicker = () => {
@@ -75,21 +74,20 @@ export default function App({ navigation }) {
     <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.tituloPrometheus}>TARJETAS</Text>
+          <Text style={globalTyT.titulo}>TARJETAS</Text>
           <Pressable onPress={() => navigation.replace('Login')}>
             <Image source={require('../../assets/img/exit.png')} />
           </Pressable>
         </View>
         <ScrollView style={styles.main}>
-          <Text style={styles.texto}>Numero de tarjeta: </Text>
-          <TextInput style={styles.entradaTexto} onChangeText={setNombre_Completo} placeholder='Numero de tarjeta'></TextInput>
-          <Text style={styles.texto}>VIN: </Text>
-          <TextInput style={styles.entradaTexto} onChangeText={setNombre_Usuario} placeholder='VIN'></TextInput>
-          <Text style={styles.texto}>Tipo tarjeta: </Text>
-          <TextInput style={styles.entradaTexto} onChangeText={setContrasena_Encriptada} placeholder='Tipo de tarjeta'></TextInput>
-          <Text style={styles.texto}>Fecha de vencimiento: </Text>
-          <Text style={styles.texto}>{chooseData}</Text>
-          <TextInput />
+          <Text style={globalTyT.texto}>Numero de tarjeta: </Text>
+          <TextInput style={globalEntradas.entradaTexto} onChangeText={setNombre_Completo} placeholder='Numero de tarjeta'></TextInput>
+          <Text style={globalTyT.texto}>VIN: </Text>
+          <TextInput style={globalEntradas.entradaTexto} onChangeText={setNombre_Usuario} placeholder='VIN'></TextInput>
+          <Text style={globalTyT.texto}>Tipo tarjeta: </Text>
+          <TextInput style={globalEntradas.entradaTexto} onChangeText={setContrasena_Encriptada} placeholder='Tipo de tarjeta'></TextInput>
+          <Text style={globalTyT.texto}>Fecha de vencimiento: </Text>
+          <Text style={globalTyT.texto}>{chooseData}</Text>
           <Button title="Show Date Picker" onPress={showDatePicker} />
           <DateTimePickerModal
             onChange={this.onChange}
@@ -102,15 +100,15 @@ export default function App({ navigation }) {
           <StatusBar style="auto" />
 
           <View style={styles.contenedorBotones}>
-            <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
-              <Text style={styles.tituloBotones}>Cancelar</Text>
+            <Pressable style={globalBotones.boton} title="Cancelar" onPress={() => navigation.replace('Login')}>
+              <Text style={globalBotones.tituloBoton}>Cancelar</Text>
             </Pressable>
-            <Pressable style={styles.botones} title="Ingresar" >
-              <Text style={styles.tituloBotones}>Ingresar</Text>
+            <Pressable style={globalBotones.boton} title="Ingresar" >
+              <Text style={globalBotones.tituloBoton}>Ingresar</Text>
             </Pressable>
           </View>
         </ScrollView>
-        <View style={styles.footer}>
+        <View style={globalFooter.footer}>
           <Pressable onPress={() => navigation.replace('Principal')}>
             <Image source={require('../../assets/img/home.png')} />
           </Pressable>

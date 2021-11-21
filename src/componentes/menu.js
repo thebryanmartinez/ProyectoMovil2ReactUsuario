@@ -16,11 +16,10 @@ export default function menu() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Usuarios" component={usuarios} />
         <Stack.Screen name="Tarjetas" component={tarjetas} />
+        <Stack.Screen name="Usuarios" component={usuarios} />
         <Stack.Screen name="Registro" component={registro} />
         <Stack.Screen name="Principal" component={principal} />
-
         <Stack.Screen name="IngresarProductos" component={ingresarProductos} />
         <Stack.Screen name="Login" component={login} />
         <Stack.Screen name="Producto" component={producto} />
