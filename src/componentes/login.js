@@ -6,6 +6,7 @@ import {
   TextInput,
   Alert,
   Pressable,
+  Image,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
@@ -62,6 +63,7 @@ export default function login({ navigation }) {
         <View style={styles.contenedorTitulo}>
           <Text style={globalTyT.titulo}>PROMETHEUS</Text>
         </View>
+
         <View style={[styles.contenedorControles, styles.sombraControles]}>
           <View style={styles.controles}>
             <Text style={globalTyT.texto}>Ingrese su usuario:</Text>
@@ -121,6 +123,9 @@ const styles = StyleSheet.create({
     padding: 20,
     width: "100%",
     height: "100%",
+  },
+  contenedorImagen: {
+    flex: 1,
   },
   contenedorLogin: {
     alignItems: "stretch",
