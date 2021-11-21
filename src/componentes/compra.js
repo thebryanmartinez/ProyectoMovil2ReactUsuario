@@ -48,7 +48,7 @@ export default function App({ navigation }) {
             <View>
               <Text style={globalTyT.texto}>Total</Text>
             </View>
-            <Pressable>
+            <Pressable onPress={() => navigation.replace("Tarjetas")}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}

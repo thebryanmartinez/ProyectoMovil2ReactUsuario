@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import * as Font from 'expo-font'
-import Menu from './src/componentes/menu';
-import AppLoading from 'expo-app-loading';
+import React, { useState } from "react";
+import * as Font from "expo-font";
+import Menu from "./src/componentes/menu";
+import AppLoading from "expo-app-loading";
 
-const getFonts = () => Font.loadAsync({
-    'montserrat-regular': require('./assets/fonts/Montserrat-Regular.ttf'),
-    'montserrat-bold': require('./assets/fonts/Montserrat-Bold.ttf'),
-    'montserrat-semibold': require('./assets/fonts/Montserrat-SemiBold.ttf')
+const getFonts = () =>
+  Font.loadAsync({
+    "montserrat-regular": require("./assets/fonts/Montserrat-Regular.ttf"),
+    "montserrat-bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+    "montserrat-semibold": require("./assets/fonts/Montserrat-SemiBold.ttf"),
   });
 
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
-  if(fontsLoaded){
-    return (
-      <Menu/>
-    );
+  if (fontsLoaded) {
+    return <Menu />;
   } else {
     return (
       <AppLoading
@@ -23,7 +22,6 @@ export default function App() {
         onFinish={() => setFontsLoaded(true)}
         onError={console.warn}
       />
-    )
+    );
   }
-  
 }
