@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Alert, TextInput, Pressable, SafeAreaView, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { LinearGradient }  from 'expo-linear-gradient';
 
 export default function App({ navigation }) {
   const [nombre_completo, setNombre_Completo]= useState(null);

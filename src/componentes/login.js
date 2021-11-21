@@ -1,6 +1,7 @@
 import React, { useState }from 'react';
 import { StyleSheet, Text, View, TextInput, Alert, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient }  from 'expo-linear-gradient';
 
 export default function login({ navigation }) {
   const [usuario, setUsuario]= useState(null);
@@ -77,8 +78,15 @@ export default function login({ navigation }) {
             </TextInput>
           </View>
           <View style={styles.contenedorBotones}>
-            <Pressable style={styles.botonInicioSesion} onPress={pressIniciarSesion}>
-              <Text style={styles.iniciarSesion}>Iniciar sesión</Text>
+            <Pressable onPress={pressIniciarSesion}>
+                <LinearGradient
+                style={styles.botonInicioSesion}
+                start={{x: 0, y: 0}}
+                end={{x: 0, y: 1}}
+                colors={['#E43E31','#F4AA31']}
+                >
+                  <Text style={styles.iniciarSesion}>Iniciar sesión</Text>
+                </LinearGradient>
             </Pressable>
           </View>
           <View style={styles.contenedorBotonesRedes}>

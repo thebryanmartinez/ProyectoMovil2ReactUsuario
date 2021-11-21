@@ -30,13 +30,27 @@ export default function App({ navigation }) {
               <TextInput style={styles.entradaTexto} onChangeText={setTelefono} placeholder='Telefono' placeholderTextColor="#ced4da"></TextInput>
               <Text style={styles.texto}>Direccion domiciliaria: </Text>
               <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' placeholderTextColor="#ced4da" multiline={true} ></TextInput>
-              <Pressable style={styles.botones}  title="Modificar">
-                    <Text style={styles.tituloBotones}>Modificar</Text>
+              <Pressable>
+                <LinearGradient
+                style={styles.botones}
+                start={{x: 0, y: 0}}
+                end={{x: 0, y: 1}}
+                colors={['#E43E31','#F4AA31']}
+                >
+                  <Text style={styles.tituloBotones}>Modificar</Text>
+                </LinearGradient>
               </Pressable>
               <View style={styles.eliminarUsuario}>
                 <Text style={styles.texto}>Desea eliminar su usuario?</Text>
-                <Pressable style={styles.botones}  title="Eliminar">
+                <Pressable>
+                  <LinearGradient
+                  style={styles.botones}
+                  start={{x: 0, y: 0}}
+                  end={{x: 0, y: 1}}
+                  colors={['#E43E31','#F4AA31']}
+                  >
                     <Text style={styles.tituloBotones}>Eliminar</Text>
+                  </LinearGradient>
                 </Pressable>
               </View>
             </ScrollView>
