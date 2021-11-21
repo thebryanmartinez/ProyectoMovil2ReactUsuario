@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Alert, TextInput, Pressable, SafeAreaView, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export default function App({ navigation }) {
   const [nombre_completo, setNombre_Completo]= useState(null);
   const [contrasena_encriptada, setContrasena_Encriptada]= useState(null);
@@ -63,11 +64,25 @@ export default function App({ navigation }) {
               <TextInput style={styles.entradaArea} maxLength={255} onChangeText={setDireccion_Usuario} placeholder='Direccion domiciliaria' placeholderTextColor="#ced4da" multiline={true} ></TextInput>
             </View> 
             <View style={styles.contenedorBotones}>
-                <Pressable style={styles.botones} title="Cancelar" onPress={() => navigation.replace('Login')}>
-                    <Text style={styles.tituloBotones}>Cancelar</Text>
+                <Pressable onPress={() => navigation.replace('Login')}>
+                <LinearGradient
+                style={styles.botones}
+                start={{x: 0, y: 0}}
+                end={{x: 0, y: 1}}
+                colors={['#E43E31','#F4AA31']}
+                >
+                </LinearGradient>
+                  <Text style={styles.tituloBotones}>Cancelar</Text>
                 </Pressable>
-                <Pressable style={styles.botones}  title="Ingresar" onPress={pressCrearUsuario} >
+                <Pressable onPress={pressCrearUsuario} >
+                  <LinearGradient
+                  style={styles.boton}
+                  start={{x: 0, y: 0}}
+                  end={{x: 0, y: 1}}
+                  colors={['#E43E31','#F4AA31']}
+                  >
                     <Text style={styles.tituloBotones}>Ingresar</Text>
+                  </LinearGradient>
                 </Pressable>
             </View>
         </ScrollView>
@@ -109,7 +124,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 5,
-    fontFamily: 'montserrat-semibold',
     color: "#495057",
     borderBottomWidth: 1,
     borderStyle: "solid",
@@ -146,5 +160,6 @@ const styles = StyleSheet.create({
     color: "#072C50",
     fontSize: 26,
     fontWeight: "700",
+    fontFamily: 'montserrat-semibold',
   }
 });

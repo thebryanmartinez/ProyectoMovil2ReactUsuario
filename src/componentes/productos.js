@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Pressable, FlatList, Image, TextInput, ScrollView} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient }  from 'expo-linear-gradient';
 
 export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
@@ -71,7 +72,7 @@ export default function App({ navigation }) {
               keyExtractor={(item) => item.idproductos}
               renderItem={({item}) => {
                 return(
-                  <Pressable style={styles.contenedorFuera}>
+                  <Pressable style={styles.contenedorFuera} onPress={() => navigation.replace('Compra')}>
                     <View style={styles.contenedorDentro}>
                       <View style={styles.contenedorImagen}>
                         <Image source={require('../../assets/img/adidas3.jpg')} style={styles.imagen}/>
@@ -90,12 +91,18 @@ export default function App({ navigation }) {
             </View>
           </View>
   
-        <View style={styles.footer}> 
+        <View> 
+        <LinearGradient
+          style={styles.footer}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          colors={['#E43E31','#F4AA31']}
+          >
           <Pressable onPress={() => navigation.replace('Principal')}>
-              <Image source={require('../../assets/img/home.png')}/>
+            <Image source={require('../../assets/img/home.png')}/>
           </Pressable>
           <Pressable onPress={() => navigation.replace('Producto')}>
-              <Image source={require('../../assets/img/search.png')}/>
+            <Image source={require('../../assets/img/search.png')}/>
           </Pressable>
           <Pressable onPress={() => navigation.replace('CarritoCompras')}>
             <Image source={require('../../assets/img/shoppingcart.png')}/>
@@ -103,6 +110,7 @@ export default function App({ navigation }) {
           <Pressable onPress={() => navigation.replace('Usuarios')}>
             <Image source={require('../../assets/img/user.png')}/>
           </Pressable>
+          </LinearGradient>
         </View>
       </View>
     </SafeAreaView>

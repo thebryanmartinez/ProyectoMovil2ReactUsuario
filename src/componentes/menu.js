@@ -9,6 +9,7 @@ import usuarios from './usuarios';
 import tarjetas from './tarjetas';
 import ingresarProductos from './ingresarProductos';
 import carritoCompras from './carritoCompras';
+import compras from './compra';
 
 const Stack = createNativeStackNavigator();
 export default function menu(){
@@ -22,6 +23,7 @@ export default function menu(){
                 <Stack.Screen name="Login" component={login} />
                 <Stack.Screen name="Registro" component={registro} />
                 <Stack.Screen name="Producto" component={producto} />
+                <Stack.Screen name="Compra" component={compras} />
                 <Stack.Screen name="CarritoCompras" component={carritoCompras} />
             </Stack.Navigator>
         </NavigationContainer>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, StatusBar, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient }  from 'expo-linear-gradient';
 
 export default function App({ navigation }) {  
     const [info, setinfo] = useState([]);
@@ -60,7 +61,13 @@ export default function App({ navigation }) {
             />
             </View>
           </View>
-        <View style={styles.footer}> 
+        <View>
+          <LinearGradient
+          style={styles.footer}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          colors={['#E43E31','#F4AA31']}
+          >
           <Pressable onPress={() => navigation.replace('Principal')}>
             <Image source={require('../../assets/img/home.png')}/>
           </Pressable>
@@ -73,6 +80,7 @@ export default function App({ navigation }) {
           <Pressable onPress={() => navigation.replace('Usuarios')}>
             <Image source={require('../../assets/img/user.png')}/>
           </Pressable>
+          </LinearGradient>
         </View>
       </View>
     </SafeAreaView>

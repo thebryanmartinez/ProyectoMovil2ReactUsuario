@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mediapp2",
-    "slug": "mediapp2",
+    "name": "prometheus",
+    "slug": "prometheus",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

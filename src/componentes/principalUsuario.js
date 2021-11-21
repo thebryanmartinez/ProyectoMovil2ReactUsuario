@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient }  from 'expo-linear-gradient';
+
 
 export default function App({ navigation }) {
   const cerrarSesion = async () =>{
@@ -30,19 +32,26 @@ export default function App({ navigation }) {
               <Image source={require('../../assets/img/adidas2.jpg')} styles={styles.imagen}/>
               <Image source={require('../../assets/img/adidas3.jpg')} styles={styles.imagen}/>
             </ScrollView>
-          <View style={styles.footer}> 
-            <Pressable onPress={() => navigation.replace('Principal')}>
-                <Image source={require('../../assets/img/home.png')}/>
-            </Pressable>
-            <Pressable onPress={() => navigation.replace('Producto')}>
-                <Image source={require('../../assets/img/search.png')}/>
-            </Pressable>
-            <Pressable onPress={() => navigation.replace('CarritoCompras')}>
+          <View> 
+          <LinearGradient
+          style={styles.footer}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          colors={['#E43E31','#F4AA31']}
+          >
+          <Pressable onPress={() => navigation.replace('Principal')}>
+            <Image source={require('../../assets/img/home.png')}/>
+          </Pressable>
+          <Pressable onPress={() => navigation.replace('Producto')}>
+            <Image source={require('../../assets/img/search.png')}/>
+          </Pressable>
+          <Pressable onPress={() => navigation.replace('CarritoCompras')}>
             <Image source={require('../../assets/img/shoppingcart.png')}/>
-            </Pressable>
-            <Pressable onPress={() => navigation.replace('Usuarios')}>
+          </Pressable>
+          <Pressable onPress={() => navigation.replace('Usuarios')}>
             <Image source={require('../../assets/img/user.png')}/>
-            </Pressable>
+          </Pressable>
+          </LinearGradient>
         </View>
       </SafeAreaView>
     </View>

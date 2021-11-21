@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, Image, View, Pressable, SafeAreaView, StatusBar, ScrollView, TextInput } from 'react-native';
+import { LinearGradient }  from 'expo-linear-gradient';
 
 export default function App({ navigation }) {
 
@@ -39,19 +40,26 @@ export default function App({ navigation }) {
                 </Pressable>
               </View>
             </ScrollView>
-          <View style={styles.footer}> 
-            <Pressable onPress={() => navigation.replace('Principal')}>
-              <Image source={require('../../assets/img/home.png')}/>
-            </Pressable>
-            <Pressable onPress={() => navigation.replace('Producto')}>
-              <Image source={require('../../assets/img/search.png')}/>
-            </Pressable>
-            <Pressable onPress={() => navigation.replace('CarritoCompras')}>
-              <Image source={require('../../assets/img/shoppingcart.png')}/>
-            </Pressable>
-            <Pressable onPress={() => navigation.replace('Usuarios')}>
-              <Image source={require('../../assets/img/user.png')}/>
-            </Pressable>
+          <View> 
+          <LinearGradient
+          style={styles.footer}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          colors={['#E43E31','#F4AA31']}
+          >
+          <Pressable onPress={() => navigation.replace('Principal')}>
+            <Image source={require('../../assets/img/home.png')}/>
+          </Pressable>
+          <Pressable onPress={() => navigation.replace('Producto')}>
+            <Image source={require('../../assets/img/search.png')}/>
+          </Pressable>
+          <Pressable onPress={() => navigation.replace('CarritoCompras')}>
+            <Image source={require('../../assets/img/shoppingcart.png')}/>
+          </Pressable>
+          <Pressable onPress={() => navigation.replace('Usuarios')}>
+            <Image source={require('../../assets/img/user.png')}/>
+          </Pressable>
+          </LinearGradient>
         </View>
       </View>
     </SafeAreaView>
@@ -83,7 +91,6 @@ const styles = StyleSheet.create({
     },
     footer:{
       display: 'flex',
-      backgroundColor: '#ed7731',
       padding: 10,
       flexDirection: 'row',
       justifyContent: 'space-around',
