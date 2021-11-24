@@ -19,7 +19,7 @@ export default function App({ navigation }) {
 
   if (ejecucion == null) {
     try {
-      const response = fetch("http://192.168.1.165:3001/api/productos/snekers?idcategorias=3")
+      const response = fetch("http://192.168.0.8:3001/api/productos/snekers?idcategorias=3")
         .then((response) => response.json())
         .then((json) => {
           setinfo(json);
@@ -47,7 +47,7 @@ export default function App({ navigation }) {
     } else {
       try {
         const response = fetch(
-          "http://192.168.1.165:3001/api/productos/snekers?idcategorias=3"
+          "http://192.168.0.8:3001/api/productos/snekers?idcategorias=3"
         )
           .then((response) => response.json())
           .then((json) => {

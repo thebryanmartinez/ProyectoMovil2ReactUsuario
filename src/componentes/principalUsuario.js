@@ -34,7 +34,33 @@ export default function App({ navigation }) {
   const setData = (option) => {
     ops = option;
     setchooseData(option);
-    alert(ops);
+
+    if(ops=='Camisas')
+    {
+      navigation.replace('ProductosCamisas') 
+    }
+    else
+    {
+      if(ops=='Joggers')
+      {
+        navigation.replace('ProductosJoggers')
+      }
+      else
+      {
+        if(ops=='Accesorios')
+        {
+          navigation.replace('ProductosAccesorios')
+        }
+        else
+        {
+           if(ops=='Sneakers')
+           {
+              navigation.replace('ProductosSneakers')
+           }
+        }
+      }
+     
+    }
   };
 
   return (
