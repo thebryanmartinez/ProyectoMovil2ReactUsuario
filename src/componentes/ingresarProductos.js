@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
+  Alert,
   Image,
   View,
   Pressable,
@@ -18,12 +19,53 @@ import { globalEntradas } from "../styles/entradas";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function App({ navigation }) {
-  const [nombre_completo, setNombre_Completo] = useState(null);
-  const [contrasena_encriptada, setContrasena_Encriptada] = useState(null);
-  const [nombre_usuario, setNombre_Usuario] = useState(null);
-  const [correo, setCorreo] = useState(null);
-  const [telefono, setTelefono] = useState(null);
-  const [direccion_usuario, setDireccion_Usuario] = useState(false);
+  const [nombre_producto, setnombre_producto] = useState(null);
+  const [cantidad_producto, setcantidad_producto] = useState(null);
+  const [precio_producto, setprecio_producto] = useState(null);
+  const [marca_producto, setmarca_producto] = useState(null);
+  const [idcategorias, setidcategoria] = useState(null);
+  const [costo, setcosto] = useState(false);
+
+  const pressingresarproducto = async () => {
+    if (
+      !nombre_producto ||
+      !cantidad_producto ||
+      !precio_producto ||
+      !marca_producto ||
+      !idcategorias ||
+      !costo
+    ) {
+      console.log("Debe escribir los datos completos");
+      Alert.alert("Prometheus", "Debe escribir los datos completos");
+    } else {
+      try {
+        var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
+        var token = cliente.token;
+
+        const response = await fetch("http://192.168.0.8:3001/api/productos/guardar", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+
+          body: JSON.stringify({
+            nombre_producto: nombre_producto,
+            cantidad_producto: cantidad_producto,
+            precio_producto: precio_producto,
+            marca_producto: marca_producto,
+            idcategorias: idcategorias,
+            costo: costo,
+          }),
+        });
+        Alert.alert("Prometheus", "Producto ingresado correctamente");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
 
   return (
     <SafeAreaView style={styles.fondo}>
@@ -39,7 +81,7 @@ export default function App({ navigation }) {
           <TextInput
             placeholderTextColor="#ced4da"
             style={globalEntradas.entradaTexto}
-            onChangeText={setNombre_Completo}
+            onChangeText={setnombre_producto}
             placeholder="Nombre del producto"
           ></TextInput>
           <Text style={globalTyT.texto}>Cantidad del producto: </Text>
@@ -47,7 +89,7 @@ export default function App({ navigation }) {
             placeholderTextColor="#ced4da"
             keyboardType="number-pad"
             style={globalEntradas.entradaTexto}
-            onChangeText={setNombre_Usuario}
+            onChangeText={setcantidad_producto}
             placeholder="Cantidad en inventario"
           ></TextInput>
           <Text style={globalTyT.texto}>Precio de compra del producto: </Text>
@@ -55,14 +97,14 @@ export default function App({ navigation }) {
             placeholderTextColor="#ced4da"
             keyboardType="number-pad"
             style={globalEntradas.entradaTexto}
-            onChangeText={setContrasena_Encriptada}
+            onChangeText={setcosto}
             placeholder="Precio de compra del producto"
           ></TextInput>
           <Text style={globalTyT.texto}>Marca del producto: </Text>
           <TextInput
             placeholderTextColor="#ced4da"
             style={globalEntradas.entradaTexto}
-            onChangeText={setCorreo}
+            onChangeText={setmarca_producto}
             placeholder="Marca del producto"
           ></TextInput>
           <Text style={globalTyT.texto}>ID de categoria: </Text>
@@ -70,7 +112,7 @@ export default function App({ navigation }) {
             placeholderTextColor="#ced4da"
             keyboardType="number-pad"
             style={globalEntradas.entradaTexto}
-            onChangeText={setCorreo}
+            onChangeText={setidcategoria}
             placeholder="ID de Categoria"
           ></TextInput>
           <Text style={globalTyT.texto}>Precio de venta: </Text>
@@ -78,7 +120,7 @@ export default function App({ navigation }) {
             placeholderTextColor="#ced4da"
             keyboardType="number-pad"
             style={globalEntradas.entradaTexto}
-            onChangeText={setCorreo}
+            onChangeText={setprecio_producto}
             placeholder="Precio de venta"
           ></TextInput>
           <View style={styles.contenedorBotones}>
@@ -92,7 +134,7 @@ export default function App({ navigation }) {
                 <Text style={globalBotones.tituloBoton}>Cancelar</Text>
               </LinearGradient>
             </Pressable>
-            <Pressable onPress={() => navigation.replace("PrincipalEmpleado")}>
+            <Pressable onPress={pressingresarproducto}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}
