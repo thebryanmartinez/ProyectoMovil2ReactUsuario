@@ -27,7 +27,6 @@ export default function menu() {
         <Stack.Screen name="ProductosAccesorios" component={productosAccesorios} />
         <Stack.Screen name="PrincipalEmpleado" component={principalEmpleado} />
         <Stack.Screen name="IngresarProducto" component={ingresarProducto} />
-        <Stack.Screen name="PrincipalEmpleado" component={principalEmpleado} />
         <Stack.Screen name="Login" component={login} />
         <Stack.Screen name="Tarjetas" component={tarjetas} />
         <Stack.Screen name="Usuarios" component={usuarios} />
