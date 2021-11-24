@@ -7,22 +7,23 @@ import principal from "./principalUsuario";
 import producto from "./productos";
 import usuarios from "./usuarios";
 import tarjetas from "./tarjetas";
-import ingresarProductos from "./ingresarProductos";
+import ingresarProducto from "./ingresarProductos";
 import carritoCompras from "./carritoCompras";
 import compras from "./compra";
+import principalEmpleado from "./principalEmpleado";
 
 const Stack = createNativeStackNavigator();
 export default function menu() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="PrincipalEmpleado" component={principalEmpleado} />
+        <Stack.Screen name="IngresarProducto" component={ingresarProducto} />
         <Stack.Screen name="Login" component={login} />
         <Stack.Screen name="Tarjetas" component={tarjetas} />
         <Stack.Screen name="Usuarios" component={usuarios} />
         <Stack.Screen name="Registro" component={registro} />
         <Stack.Screen name="Principal" component={principal} />
-        <Stack.Screen name="IngresarProductos" component={ingresarProductos} />
-        
         <Stack.Screen name="Producto" component={producto} />
         <Stack.Screen name="Compra" component={compras} />
         <Stack.Screen name="CarritoCompras" component={carritoCompras} />

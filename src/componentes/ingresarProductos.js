@@ -15,6 +15,7 @@ import { globalFooter } from "../styles/footer";
 import { globalTyT } from "../styles/textoytitulo";
 import { globalBotones } from "../styles/botones";
 import { globalEntradas } from "../styles/entradas";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function App({ navigation }) {
   const [nombre_completo, setNombre_Completo] = useState(null);
@@ -28,59 +29,95 @@ export default function App({ navigation }) {
     <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.tituloPrometheus}>INGRESAR PRODUCTO</Text>
+          <Text style={globalTyT.titulo}>INGRESAR PRODUCTO</Text>
           <Pressable onPress={() => navigation.replace("Login")}>
             <Image source={require("../../assets/img/exit.png")} />
           </Pressable>
         </View>
         <ScrollView style={styles.main}>
-          <Text style={styles.texto}>Numero de tarjeta: </Text>
+          <Text style={globalTyT.texto}>Nombre del producto: </Text>
           <TextInput
-            style={styles.entradaTexto}
+            placeholderTextColor="#ced4da"
+            style={globalEntradas.entradaTexto}
             onChangeText={setNombre_Completo}
-            placeholder="Numero de tarjeta"
+            placeholder="Nombre del producto"
           ></TextInput>
-          <Text style={styles.texto}>VIN: </Text>
+          <Text style={globalTyT.texto}>Cantidad del producto: </Text>
           <TextInput
-            style={styles.entradaTexto}
+            placeholderTextColor="#ced4da"
+            keyboardType="number-pad"
+            style={globalEntradas.entradaTexto}
             onChangeText={setNombre_Usuario}
-            placeholder="VIN"
+            placeholder="Cantidad en inventario"
           ></TextInput>
-          <Text style={styles.texto}>Tipo tarjeta: </Text>
+          <Text style={globalTyT.texto}>Precio de compra del producto: </Text>
           <TextInput
-            style={styles.entradaTexto}
+            placeholderTextColor="#ced4da"
+            keyboardType="number-pad"
+            style={globalEntradas.entradaTexto}
             onChangeText={setContrasena_Encriptada}
-            placeholder="Tipo de tarjeta"
+            placeholder="Precio de compra del producto"
           ></TextInput>
-          <Text style={styles.texto}>Fecha de vencimiento: </Text>
+          <Text style={globalTyT.texto}>Marca del producto: </Text>
           <TextInput
-            style={styles.entradaTexto}
+            placeholderTextColor="#ced4da"
+            style={globalEntradas.entradaTexto}
             onChangeText={setCorreo}
-            placeholder="Fecha de vencimiento"
+            placeholder="Marca del producto"
+          ></TextInput>
+          <Text style={globalTyT.texto}>ID de categoria: </Text>
+          <TextInput
+            placeholderTextColor="#ced4da"
+            keyboardType="number-pad"
+            style={globalEntradas.entradaTexto}
+            onChangeText={setCorreo}
+            placeholder="ID de Categoria"
+          ></TextInput>
+          <Text style={globalTyT.texto}>Precio de venta: </Text>
+          <TextInput
+            placeholderTextColor="#ced4da"
+            keyboardType="number-pad"
+            style={globalEntradas.entradaTexto}
+            onChangeText={setCorreo}
+            placeholder="Precio de venta"
           ></TextInput>
           <View style={styles.contenedorBotones}>
-            <Pressable
-              style={styles.botones}
-              title="Cancelar"
-              onPress={() => navigation.replace("Login")}
-            >
-              <Text style={styles.tituloBotones}>Cancelar</Text>
+            <Pressable onPress={() => navigation.replace("")}>
+              <LinearGradient
+                style={globalBotones.boton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                colors={["#E43E31", "#F4AA31"]}
+              >
+                <Text style={globalBotones.tituloBoton}>Cancelar</Text>
+              </LinearGradient>
             </Pressable>
-            <Pressable style={styles.botones} title="Ingresar">
-              <Text style={styles.tituloBotones}>Ingresar</Text>
+            <Pressable onPress={() => navigation.replace("PrincipalEmpleado")}>
+              <LinearGradient
+                style={globalBotones.boton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                colors={["#E43E31", "#F4AA31"]}
+              >
+                <Text style={globalBotones.tituloBoton}>Ingresar</Text>
+              </LinearGradient>
             </Pressable>
           </View>
         </ScrollView>
-        <View style={styles.footer}>
-          <Pressable onPress={() => navigation.replace("Principal")}>
-            <Image source={require("../../assets/img/home.png")} />
-          </Pressable>
-          <Pressable onPress={() => navigation.replace("Producto")}>
-            <Image source={require("../../assets/img/search.png")} />
-          </Pressable>
-          <Pressable onPress={() => navigation.replace("Usuarios")}>
-            <Image source={require("../../assets/img/user.png")} />
-          </Pressable>
+        <View>
+          <LinearGradient
+            style={globalFooter.footer}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            colors={["#E43E31", "#F4AA31"]}
+          >
+            <Pressable onPress={() => navigation.replace("PrincipalEmpleado")}>
+              <Image source={require("../../assets/img/home.png")} />
+            </Pressable>
+            <Pressable onPress={() => navigation.replace("IngresarProducto")}>
+              <Image source={require("../../assets/img/add.png")} />
+            </Pressable>
+          </LinearGradient>
         </View>
       </View>
     </SafeAreaView>
@@ -110,52 +147,10 @@ const styles = StyleSheet.create({
     marginTop: 25,
     margin: 20,
   },
-  footer: {
-    display: "flex",
-    backgroundColor: "#ed7731",
-    padding: 10,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  tituloPrometheus: {
-    color: "#ed7731",
-    fontSize: 24,
-    textAlign: "left",
-    fontFamily: "montserrat-bold",
-  },
-  texto: {
-    textAlign: "left",
-    color: "#ed7731",
-    fontSize: 24,
-    fontFamily: "montserrat-bold",
-  },
-  entradaTexto: {
-    backgroundColor: "#fff",
-    fontFamily: "montserrat-semibold",
-    height: 32,
-    marginTop: 10,
-    marginBottom: 10,
-  },
   contenedorBotones: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginTop: 20,
-  },
-  botones: {
-    marginTop: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 35,
-    paddingRight: 35,
-    borderRadius: 5,
-    backgroundColor: "#ed7731",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  tituloBotones: {
-    color: "#072C50",
-    fontSize: 26,
-    fontWeight: "700",
   },
 });
