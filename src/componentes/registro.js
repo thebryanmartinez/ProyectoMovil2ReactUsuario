@@ -39,7 +39,7 @@ export default function App({ navigation }) {
         var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
         var token = cliente.token;
 
-        const response = await fetch("http://192.168.1.165:3001/api/usuarios", {
+        const response = await fetch("http://192.168.1.18:3001/api/usuarios", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -56,6 +56,18 @@ export default function App({ navigation }) {
             direccion_usuario: direccion_usuario,
           }),
         });
+//---------------------
+        const usu = {
+          nombre_completo: nombre_completo, 
+          contrasena_encriptada: contrasena_encriptada,
+          nombre_usuario: nombre_usuario,
+          correo: correo,
+          telefono: telefono,
+          direccion_usuario: direccion_usuario
+      };
+        const cliente_datos = JSON.stringify(usu);
+        await AsyncStorage.setItem("cliente_datos", cliente_datos);
+//-------------------------------
         Alert.alert("Prometheus", "Usuario ingresado correctamente");
       } catch (error) {
         console.error(error);

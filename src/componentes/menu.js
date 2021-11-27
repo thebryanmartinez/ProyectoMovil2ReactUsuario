@@ -21,13 +21,13 @@ export default function menu() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={login} />
         <Stack.Screen name="ProductosSneakers" component={productosSneakers} />
         <Stack.Screen name="ProductosCamisas" component={productosCamisas} />
         <Stack.Screen name="ProductosJoggers" component={productosJoggers} />
         <Stack.Screen name="ProductosAccesorios" component={productosAccesorios} />
         <Stack.Screen name="PrincipalEmpleado" component={principalEmpleado} />
         <Stack.Screen name="IngresarProducto" component={ingresarProducto} />
-        <Stack.Screen name="Login" component={login} />
         <Stack.Screen name="Tarjetas" component={tarjetas} />
         <Stack.Screen name="Usuarios" component={usuarios} />
         <Stack.Screen name="Registro" component={registro} />

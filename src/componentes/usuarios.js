@@ -9,20 +9,40 @@ import {
   StatusBar,
   ScrollView,
   TextInput,
+  Alert,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
 import { globalTyT } from "../styles/textoytitulo";
 import { globalBotones } from "../styles/botones";
 import { globalEntradas } from "../styles/entradas";
+import { date } from "yup";
 
 export default function App({ navigation }) {
+  const [usuario, setUsuario] = useState(null);
   const [nombre_completo, setNombre_Completo] = useState(null);
   const [contrasena_encriptada, setContrasena_Encriptada] = useState(null);
   const [nombre_usuario, setNombre_Usuario] = useState(null);
   const [correo, setCorreo] = useState(null);
   const [telefono, setTelefono] = useState(null);
   const [direccion_usuario, setDireccion_Usuario] = useState(false);
+
+  const readData = async () => { 
+   try {
+    var cliente = JSON.parse(await AsyncStorage.getItem("cliente_datos"));
+    setUsuario(cliente.nombre_usuario);
+    setNombre_Completo(cliente.nombre_completo);
+    setContrasena_Encriptada(cliente.contrasena_encriptada);
+    setCorreo(cliente.correo);
+    setTelefono(cliente.telefono);
+    setDireccion_Usuario(cliente.direccion_usuario);
+      Alert.alert ("Leer correctamente:" + nombre_completo +" "+nombre_usuario+" "+correo+" "+telefono);
+   } catch(error) {
+      Alert.alert ("Error al leer:" + error);
+  }
+
+}
 
   return (
     <SafeAreaView style={styles.fondo}>
@@ -75,7 +95,7 @@ export default function App({ navigation }) {
             placeholderTextColor="#ced4da"
             multiline={true}
           ></TextInput>
-          <Pressable>
+          <Pressable onPress={readData}>
             <LinearGradient
               style={globalBotones.boton}
               start={{ x: 0, y: 0 }}

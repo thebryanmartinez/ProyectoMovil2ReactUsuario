@@ -26,7 +26,7 @@ export default function login({ navigation }) {
     } else {
       try {
         const response = await fetch(
-          "http://192.168.1.165:3001/api/autenticacion/iniciosesion/",
+          "http://192.168.1.18:3001/api/autenticacion/iniciosesion/",
           {
             method: "POST",
             headers: {
@@ -40,6 +40,7 @@ export default function login({ navigation }) {
           }
         );
         const json = await response.json();
+        
         console.log(json);
         if (json.data.length == 0) {
           console.log(json.msj);
@@ -47,6 +48,10 @@ export default function login({ navigation }) {
         } else {
           const cliente = JSON.stringify(json.data);
           await AsyncStorage.setItem("cliente", cliente);
+
+          const cliente_usuario = JSON.stringify(usuario);
+          await AsyncStorage.setItem("cliente_usuario", cliente_usuario);
+        
           console.log(json.msj);
           Alert.alert("Prometheus", json.msj);
           navigation.replace("Principal");
