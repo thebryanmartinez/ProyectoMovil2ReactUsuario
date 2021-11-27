@@ -20,29 +20,26 @@ import { globalEntradas } from "../styles/entradas";
 import { date } from "yup";
 
 export default function App({ navigation }) {
-  const [usuario, setUsuario] = useState(null);
+  const [nombre_usuario, setNombre_Usuario] = useState(null);
   const [nombre_completo, setNombre_Completo] = useState(null);
   const [contrasena_encriptada, setContrasena_Encriptada] = useState(null);
-  const [nombre_usuario, setNombre_Usuario] = useState(null);
   const [correo, setCorreo] = useState(null);
   const [telefono, setTelefono] = useState(null);
   const [direccion_usuario, setDireccion_Usuario] = useState(false);
 
-  const readData = async () => { 
-   try {
-    var cliente = JSON.parse(await AsyncStorage.getItem("cliente_datos"));
-    setUsuario(cliente.nombre_usuario);
-    setNombre_Completo(cliente.nombre_completo);
-    setContrasena_Encriptada(cliente.contrasena_encriptada);
-    setCorreo(cliente.correo);
-    setTelefono(cliente.telefono);
-    setDireccion_Usuario(cliente.direccion_usuario);
-      Alert.alert ("Leer correctamente:" + nombre_completo +" "+nombre_usuario+" "+correo+" "+telefono);
-   } catch(error) {
-      Alert.alert ("Error al leer:" + error);
-  }
-
-}
+  const readData = async () => {
+    try {
+      var cliente = JSON.parse(await AsyncStorage.getItem("cliente_datos"));
+      setNombre_Usuario(cliente.nombre_usuario);
+      setNombre_Completo(cliente.nombre_completo);
+      setContrasena_Encriptada(cliente.contrasena_encriptada);
+      setCorreo(cliente.correo);
+      setTelefono(cliente.telefono);
+      setDireccion_Usuario(cliente.direccion_usuario);
+    } catch (error) {
+      Alert.alert("Error al leer:" + error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.fondo}>
@@ -57,35 +54,45 @@ export default function App({ navigation }) {
             onChangeText={setNombre_Completo}
             placeholderTextColor="#ced4da"
             placeholder="Nombre completo"
-          ></TextInput>
+          >
+            {nombre_completo}
+          </TextInput>
           <Text style={globalTyT.texto}>Nombre de usuario: </Text>
           <TextInput
             style={globalEntradas.entradaTexto}
             onChangeText={setNombre_Usuario}
             placeholder="Nombre de usuario"
             placeholderTextColor="#ced4da"
-          ></TextInput>
+          >
+            {nombre_usuario}
+          </TextInput>
           <Text style={globalTyT.texto}>Contraseña: </Text>
           <TextInput
             style={globalEntradas.entradaTexto}
             onChangeText={setContrasena_Encriptada}
             placeholder="Contraseña"
             placeholderTextColor="#ced4da"
-          ></TextInput>
+          >
+            {contrasena_encriptada}
+          </TextInput>
           <Text style={globalTyT.texto}>Correo electronico: </Text>
           <TextInput
             style={globalEntradas.entradaTexto}
             onChangeText={setCorreo}
             placeholder="Correo electronico"
             placeholderTextColor="#ced4da"
-          ></TextInput>
+          >
+            {correo}
+          </TextInput>
           <Text style={globalTyT.texto}>Telefono: </Text>
           <TextInput
             style={globalEntradas.entradaTexto}
             onChangeText={setTelefono}
             placeholder="Telefono"
             placeholderTextColor="#ced4da"
-          ></TextInput>
+          >
+            {telefono}
+          </TextInput>
           <Text style={globalTyT.texto}>Direccion domiciliaria: </Text>
           <TextInput
             style={globalEntradas.entradaArea}
@@ -94,17 +101,31 @@ export default function App({ navigation }) {
             placeholder="Direccion domiciliaria"
             placeholderTextColor="#ced4da"
             multiline={true}
-          ></TextInput>
-          <Pressable onPress={readData}>
-            <LinearGradient
-              style={globalBotones.boton}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 0, y: 1 }}
-              colors={["#E43E31", "#F4AA31"]}
-            >
-              <Text style={globalBotones.tituloBoton}>Modificar</Text>
-            </LinearGradient>
-          </Pressable>
+          >
+            {direccion_usuario}
+          </TextInput>
+          <View style={styles.contenedorBotones}>
+            <Pressable onPress={readData}>
+              <LinearGradient
+                style={globalBotones.botonConMargen}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                colors={["#E43E31", "#F4AA31"]}
+              >
+                <Text style={globalBotones.tituloBoton}>Llenar</Text>
+              </LinearGradient>
+            </Pressable>
+            <Pressable>
+              <LinearGradient
+                style={globalBotones.botonConMargen}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                colors={["#E43E31", "#F4AA31"]}
+              >
+                <Text style={globalBotones.tituloBoton}>Modificar</Text>
+              </LinearGradient>
+            </Pressable>
+          </View>
           <View style={styles.eliminarUsuario}>
             <Text style={globalTyT.texto}>Desea eliminar su usuario?</Text>
             <Pressable>

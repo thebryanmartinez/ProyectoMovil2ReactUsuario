@@ -26,7 +26,7 @@ export default function login({ navigation }) {
     } else {
       try {
         const response = await fetch(
-          "http://192.168.1.18:3001/api/autenticacion/iniciosesion/",
+          "http://192.168.1.165:3001/api/autenticacion/iniciosesion/",
           {
             method: "POST",
             headers: {
