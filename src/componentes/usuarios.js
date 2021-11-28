@@ -41,6 +41,52 @@ export default function App({ navigation }) {
     }
   };
 
+  const eliminarUsuario = async() => {
+    try {
+      var nombre = JSON.parse(await AsyncStorage.getItem("cliente_usuario"));
+    }  
+      catch (error) {
+        Alert.alert("Error al leer:" + error);
+      }
+    fetch("http://192.168.0.8:3001/api/usuarios/" + nombre, {
+      method: "DELETE",
+      
+    })
+      .then((res) => res.text()) // or res.json()
+      .then((res) => console.log(res));
+    Alert.alert("Eliminado", "El Usuario ha sido eliminado con exito");
+    navigation.replace('Login') 
+  
+  }
+
+  const ActualizarUsuario = async() => {
+    try {
+      var nombre = JSON.parse(await AsyncStorage.getItem("cliente_usuario"));
+    }  
+      catch (error) {
+        Alert.alert("Error al leer:" + error);
+      }
+    fetch("http://192.168.0.8:3001/api/usuarios/?nombre_usuario=" + nombre, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        nombre_completo: nombre_completo,
+        contrasena_encriptada: contrasena_encriptada,
+        nombre_usuario: nombre_usuario,
+        correo: correo,
+        telefono: telefono,
+        direccion_usuario: direccion_usuario,
+      }),
+    })
+      .then((res) => res.text()) // or res.json()
+      .then((res) => console.log(res));
+    Alert.alert("Actualizado", "El Usuario ha sido Actualizado con exito");
+  
+  }
   return (
     <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
@@ -115,7 +161,7 @@ export default function App({ navigation }) {
                 <Text style={globalBotones.tituloBoton}>Llenar</Text>
               </LinearGradient>
             </Pressable>
-            <Pressable>
+            <Pressable onPress={ActualizarUsuario}>
               <LinearGradient
                 style={globalBotones.botonConMargen}
                 start={{ x: 0, y: 0 }}
@@ -128,7 +174,7 @@ export default function App({ navigation }) {
           </View>
           <View style={styles.eliminarUsuario}>
             <Text style={globalTyT.texto}>Desea eliminar su usuario?</Text>
-            <Pressable>
+            <Pressable onPress={eliminarUsuario}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}
