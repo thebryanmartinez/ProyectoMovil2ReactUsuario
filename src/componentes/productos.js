@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
+import { globalBotones } from "../styles/botones"
 
 export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
@@ -109,6 +110,18 @@ export default function App({ navigation }) {
                           L. {item.costo}
                         </Text>
                       </View>
+                      <Pressable onPress={""}>
+                        <LinearGradient
+                          style={globalBotones.boton}
+                          start={{ x: 0, y: 0 }}
+                          end={{ x: 0, y: 1 }}
+                          colors={["#E43E31", "#F4AA31"]}
+                        >
+                          <Text style={globalBotones.tituloBoton}>
+                            Elegir
+                          </Text>
+                        </LinearGradient>
+                      </Pressable>
                     </View>
                   </Pressable>
                 );
