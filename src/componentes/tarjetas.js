@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
   ScrollView,
+  Alert,
   TextInput,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,12 +20,11 @@ import { globalEntradas } from "../styles/entradas";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function App({ navigation }) {
-  const [nombre_completo, setNombre_Completo] = useState(null);
-  const [contrasena_encriptada, setContrasena_Encriptada] = useState(null);
-  const [nombre_usuario, setNombre_Usuario] = useState(null);
-  const [correo, setCorreo] = useState(null);
-  const [telefono, setTelefono] = useState(null);
-  const [direccion_usuario, setDireccion_Usuario] = useState(false);
+  const [num_tarjeta, setnum_tarjeta] = useState(null);
+  const [fecha_vencimiento, setfecha_vencimiento] = useState(null);
+  const [VIN, setVIN] = useState(null);
+  const [tipo_tarjeta, settipo_tarjeta] = useState(null);
+  const [idusuario, setidusuario] = useState(null);
 
   const [chooseData, setchooseData] = useState("");
 
@@ -46,6 +46,8 @@ export default function App({ navigation }) {
       "-" +
       Fecha.getDate();
     setchooseData(FechaFormato);
+    setfecha_vencimiento(FechaFormato);
+    Alert.alert("SEVAN" +FechaFormato);
   };
 
   const showDatePicker = () => {
@@ -62,6 +64,78 @@ export default function App({ navigation }) {
     Mostrar(date);
   };
 
+  //const listar = async () => {
+      //};
+
+  const pressSEVAN = async () => {
+    try {
+      var nombre = JSON.parse(await AsyncStorage.getItem("cliente_usuario"));
+      var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
+      var token = cliente.token;
+      const response = await fetch(
+        'http://192.168.0.8:3001/api/usuarios/?nombre_usuario=' + nombre , {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          
+        });
+      const json = await response.json();
+      var id= json.idusuario;
+      console.log(json);
+      Alert.alert("PERROOS" + id);
+      setidusuario(id);
+    } catch (error) {
+      console.error(error);
+    }
+    Alert.alert("HOLA" + "" + idusuario + "" + num_tarjeta + ""+ fecha_vencimiento + ""+ VIN + ""+tipo_tarjeta);
+    if (!idusuario ||!num_tarjeta ||!fecha_vencimiento ||!VIN ||!tipo_tarjeta) {
+      console.log("Debe escribir los datos completos");
+      Alert.alert("Prometheus", "Debe escribir los datos completos");
+    } else {
+      try {
+        const response = await fetch(
+          "http://192.168.0.8:3001/api/tarjetas",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({
+              num_tarjeta: num_tarjeta,
+              fecha_vencimiento: fecha_vencimiento,
+              VIN:VIN,
+              tipo_tarjeta:tipo_tarjeta,
+              idusuario:idusuario
+
+            }),
+          }
+        );
+
+        const usu = {
+          num_tarjeta: num_tarjeta, 
+          fecha_vencimiento: fecha_vencimiento,
+          VIN: VIN,
+          tipo_tarjeta: tipo_tarjeta,
+          idusuario: idusuario
+      };
+
+        const json = await response.json();
+        
+        console.log(json);
+        const tarjeta = JSON.stringify(usu);
+        await AsyncStorage.setItem("tarjeta", tarjeta);
+        Alert.alert("Prometheus", "Tarjeta ingresada correctamente");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
@@ -72,7 +146,7 @@ export default function App({ navigation }) {
           <Text style={globalTyT.texto}>Numero de tarjeta: </Text>
           <TextInput
             style={globalEntradas.entradaTexto}
-            onChangeText={setNombre_Completo}
+            onChangeText={setnum_tarjeta}
             keyboardType="number-pad"
             placeholder="Numero de tarjeta"
             placeholderTextColor="#ced4da"
@@ -80,7 +154,7 @@ export default function App({ navigation }) {
           <Text style={globalTyT.texto}>VIN:</Text>
           <TextInput
             style={globalEntradas.entradaTexto}
-            onChangeText={setNombre_Usuario}
+            onChangeText={setVIN}
             keyboardType="number-pad"
             placeholder="VIN"
             placeholderTextColor="#ced4da"
@@ -88,7 +162,7 @@ export default function App({ navigation }) {
           <Text style={globalTyT.texto}>Tipo tarjeta: </Text>
           <TextInput
             style={globalEntradas.entradaTexto}
-            onChangeText={setContrasena_Encriptada}
+            onChangeText={settipo_tarjeta}
             placeholder="Tipo de tarjeta"
             placeholderTextColor="#ced4da"
           ></TextInput>
@@ -126,7 +200,7 @@ export default function App({ navigation }) {
                 <Text style={globalBotones.tituloBoton}>Cancelar</Text>
               </LinearGradient>
             </Pressable>
-            <Pressable>
+            <Pressable onPress={pressSEVAN}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}
