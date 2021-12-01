@@ -10,6 +10,7 @@ import {
   Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
 import { globalBotones } from "../styles/botones";
@@ -18,10 +19,16 @@ export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
   const [ejecucion, setEjecucion] = useState(null);
   const [search, setSearch] = useState("");
+  const [ idproductos, setidproductos]= useState(null);
+  const [ nombre_producto, setnombre_producto]= useState(null);
+  const [ marca_producto, setmarca_producto]= useState(null);
+  const [ precio_producto, setprecio_producto]= useState(null);
+
+
 
   if (ejecucion == null) {
     try {
-      const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
+      const response = fetch("http://192.168.0.8:3001/api/productos/listar2")
         .then((response) => response.json())
         .then((json) => {
           setinfo(json);
@@ -34,10 +41,28 @@ export default function App({ navigation }) {
     }
   }
 
-  function elegir(item) {
+  const elegir = async (item) => {
     console.log(item)
     Alert.alert(item.nombre_producto);
-  }
+    setidproductos(item.idproductos);
+    setnombre_producto(item.nombre_producto);
+    setmarca_producto(item.marca_producto);
+    setprecio_producto(item.precio_producto);
+    const datos = 
+    {
+      idproductos: idproductos,
+      nombre_producto: nombre_producto,
+      marca_producto: marca_producto,
+      precio_producto: precio_producto,
+    };
+    const datos_productos = JSON.stringify(datos);
+    await AsyncStorage.setItem("datos_productos", datos_productos);
+    Alert.alert("PERROS" + idproductos + "" + nombre_producto + "" +marca_producto + "" + precio_producto );
+    navigation.replace("Compra");
+
+  };
+
+
 
   const searchFilter = (text) => {
     if (text) {
@@ -54,7 +79,7 @@ export default function App({ navigation }) {
     } else {
       try {
         const response = fetch(
-          "http://192.168.1.165:3001/api/productos/listar2"
+          "http://192.168.0.8:3001/api/productos/listar2"
         )
           .then((response) => response.json())
           .then((json) => {

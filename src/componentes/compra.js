@@ -7,8 +7,10 @@ import {
   Image,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
 import { globalTyT } from "../styles/textoytitulo";
@@ -16,6 +18,26 @@ import { globalBotones } from "../styles/botones";
 import { globalEntradas } from "../styles/entradas";
 
 export default function App({ navigation }) {
+  const [ idproductos, setidproductos]= useState(null);
+  const [ nombre_producto, setnombre_producto]= useState(null);
+  const [ marca_producto, setmarca_producto]= useState(null);
+  const [ precio_producto, setprecio_producto]= useState(null);
+
+  const sevan = async () =>
+  {
+    try {
+      var datos = JSON.parse(await AsyncStorage.getItem("datos_productos"));
+    }  
+      catch (error) {
+        Alert.alert("Error al leer:" + error);
+      }
+      setidproductos(datos.idproductos);
+      setnombre_producto(datos.nombre_producto);
+      setmarca_producto(datos.marca_producto);
+      setprecio_producto(datos.precio_producto);
+      Alert.alert("PERROS" + idproductos + "" + nombre_producto + "" +marca_producto + "" + precio_producto );
+  }
+
   return (
     <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
@@ -56,6 +78,16 @@ export default function App({ navigation }) {
                 colors={["#E43E31", "#F4AA31"]}
               >
                 <Text style={globalBotones.tituloBoton}>Comprar</Text>
+              </LinearGradient>
+            </Pressable>
+            <Pressable onPress={sevan}>
+              <LinearGradient
+                style={globalBotones.boton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                colors={["#E43E31", "#F4AA31"]}
+              >
+                <Text style={globalBotones.tituloBoton}>Listar</Text>
               </LinearGradient>
             </Pressable>
           </View>
