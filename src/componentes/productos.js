@@ -7,11 +7,12 @@ import {
   FlatList,
   Image,
   TextInput,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
-import { globalBotones } from "../styles/botones"
+import { globalBotones } from "../styles/botones";
 
 export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
@@ -31,6 +32,11 @@ export default function App({ navigation }) {
       setEjecucion(false);
       console.error(error);
     }
+  }
+
+  function elegir(item) {
+    console.log(item)
+    Alert.alert(item.nombre_producto);
   }
 
   const searchFilter = (text) => {
@@ -110,16 +116,14 @@ export default function App({ navigation }) {
                           L. {item.costo}
                         </Text>
                       </View>
-                      <Pressable onPress={""}>
+                      <Pressable onPress={() => elegir(item)}>
                         <LinearGradient
                           style={globalBotones.boton}
                           start={{ x: 0, y: 0 }}
                           end={{ x: 0, y: 1 }}
                           colors={["#E43E31", "#F4AA31"]}
                         >
-                          <Text style={globalBotones.tituloBoton}>
-                            Elegir
-                          </Text>
+                          <Text style={globalBotones.tituloBoton}>Elegir</Text>
                         </LinearGradient>
                       </Pressable>
                     </View>
