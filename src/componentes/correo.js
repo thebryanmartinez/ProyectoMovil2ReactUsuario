@@ -15,18 +15,17 @@ import { globalBotones } from "../styles/botones";
 import { globalEntradas } from "../styles/entradas";
 
 export default function login({ navigation }) {
-  const [usuario, setUsuario] = useState(null);
-  const [contrasena, setContrasena] = useState(null);
+  const [correo, setcorreo] = useState(null);
   const [focusNombre, setFocusNombre] = useState(false);
 
-  const pressIniciarSesion = async () => {
-    if (!usuario || !contrasena) {
-      console.log("Debe escribir los datos completos");
+  const pressrecuperacion = async () => {
+    if (!correo) {
+      console.log("Debe su correo para la recuperacion");
       Alert.alert("Prometheus", "Debe escribir los datos completos");
     } else {
       try {
         const response = await fetch(
-          "http://192.168.0.8:3001/api/autenticacion/iniciosesion/",
+          "http://192.168.0.8:3001/api/autenticacion/recuperacion/",
           {
             method: "POST",
             headers: {
@@ -34,29 +33,17 @@ export default function login({ navigation }) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              nombre_usuario: usuario,
-              contrasena_encriptada: contrasena,
+              correo: correo,
+              
             }),
           }
         );
         const json = await response.json();
-        
         console.log(json);
-        if (json.data.length == 0) {
-          console.log(json.msj);
-          Alert.alert("Prometheus", json.msj);
-        } else {
-          const cliente = JSON.stringify(json.data);
-          await AsyncStorage.setItem("cliente", cliente);
-
-          const cliente_usuario = JSON.stringify(usuario);
-          await AsyncStorage.setItem("cliente_usuario", cliente_usuario);
-        
-          console.log(json.msj);
-          Alert.alert("Prometheus", json.msj);
-          navigation.replace("Principal");
+        Alert.alert("Su nueva contrasena es 123");
+        navigation.replace("Login");
         }
-      } catch (error) {
+       catch (error) {
         console.error(error);
       }
     }
@@ -71,28 +58,18 @@ export default function login({ navigation }) {
 
         <View style={[styles.contenedorControles, styles.sombraControles]}>
           <View style={styles.controles}>
-            <Text style={globalTyT.texto}>Ingrese su usuario:</Text>
+            <Text style={globalTyT.texto}>Ingrese su correo:</Text>
             <TextInput
-              value={usuario}
-              onChangeText={setUsuario}
-              placeholder="Escriba el usuario o correo"
+              value={correo}
+              onChangeText={setcorreo}
+              placeholder="Escriba el correo"
               placeholderTextColor="#ced4da"
               style={globalEntradas.entradaTexto}
               autoFocus={focusNombre}
             ></TextInput>
-            <Text style={globalTyT.texto}>Ingrese su contraseña:</Text>
-            <TextInput
-              value={contrasena}
-              onChangeText={setContrasena}
-              placeholder="Escriba la contraseña"
-              placeholderTextColor="#ced4da"
-              style={globalEntradas.entradaTexto}
-              passwordRules=""
-              secureTextEntry={true}
-            ></TextInput>
           </View>
           <View style={styles.contenedorBotones}>
-            <Pressable onPress={pressIniciarSesion}>
+            <Pressable onPress={pressrecuperacion}>
               <LinearGradient
                 style={styles.botonInicioSesion}
                 start={{ x: 0, y: 0 }}
@@ -102,28 +79,17 @@ export default function login({ navigation }) {
                 <Text style={globalBotones.tituloBoton}>Iniciar sesión</Text>
               </LinearGradient>
             </Pressable>
+            <Pressable onPress={() => navigation.replace("Login")}>
+            <LinearGradient
+              style={globalBotones.boton}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              colors={["#E43E31", "#F4AA31"]}
+            >
+              <Text style={globalBotones.tituloBoton}>Cancelar</Text>
+            </LinearGradient>
+          </Pressable>
           </View>
-          <View style={styles.contenedorBotonesRedes}>
-            <View style={styles.botonRedes}>
-              <Text style={styles.texto}>No esta registrado?</Text>
-            </View>
-            <View style={styles.botonRedes}>
-              <Pressable onPress={() => navigation.replace("Registro")}>
-                <Text style={styles.registreseAqui}>Registrese aquí</Text>
-              </Pressable>
-            </View>
-          </View>
-          <View style={styles.contenedorBotonesRedes}>
-            <View style={styles.botonRedes}>
-              <Text style={styles.texto}>Se te olvido tu contrasena?</Text>
-            </View>
-            <View style={styles.botonRedes}>
-              <Pressable onPress={() => navigation.replace("Correo")}>
-                <Text style={styles.registreseAqui}>Ingresa aqui</Text>
-              </Pressable>
-            </View>
-          </View>
-          
         </View>
       </View>
     </View>

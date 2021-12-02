@@ -22,6 +22,7 @@ export default function App({ navigation }) {
   const [ nombre_producto, setnombre_producto]= useState(null);
   const [ marca_producto, setmarca_producto]= useState(null);
   const [ precio_producto, setprecio_producto]= useState(null);
+  const [ cantidad,  setcantidad] = useState(null);
 
   const sevan = async () =>
   {
@@ -35,7 +36,16 @@ export default function App({ navigation }) {
       setnombre_producto(datos.nombre_producto);
       setmarca_producto(datos.marca_producto);
       setprecio_producto(datos.precio_producto);
+       var precio = datos.precio_producto;
+       var subtotal= 0;
+       subtotal=(parseInt(precio,10)*parseInt(cantidad,10));
+       var impuesto=0;
+       impuesto=(parseInt(subtotal,10)*0.15);
+       var total=0;
+       total=(parseInt(subtotal,10)+ parseInt(impuesto,10));
+      
       Alert.alert("PERROS" + idproductos + "" + nombre_producto + "" +marca_producto + "" + precio_producto );
+      Alert.alert("Calculos" + precio + "" + subtotal + "" + impuesto + "" +total )
   }
 
   return (
@@ -61,6 +71,7 @@ export default function App({ navigation }) {
                 placeholder="#"
                 style={globalEntradas.entradaTexto}
                 placeholderTextColor="#ced4da"
+                onChangeText={setcantidad}
               />
             </View>
             <View style={styles.contenedores}>

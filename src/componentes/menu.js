@@ -15,14 +15,16 @@ import productosAccesorios from "./productosAccesorios";
 import productosJoggers from "./productosJoggers";
 import productosCamisas from "./productosCamisas";
 import productosSneakers from "./productosSneakers";
+import correo from "./correo";
 
 const Stack = createNativeStackNavigator();
 export default function menu() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={login} />
+        <Stack.Screen name= "Correo" component={correo} />
         <Stack.Screen name="Producto" component={producto} />
-        <Stack.Screen name="Login" component={login} />
         <Stack.Screen name="ProductosSneakers" component={productosSneakers} />
         <Stack.Screen name="ProductosCamisas" component={productosCamisas} />
         <Stack.Screen name="ProductosJoggers" component={productosJoggers} />
