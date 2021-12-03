@@ -51,6 +51,9 @@ export default function login({ navigation }) {
 
           const cliente_usuario = JSON.stringify(usuario);
           await AsyncStorage.setItem("cliente_usuario", cliente_usuario);
+
+          const cliente_contrasena = JSON.stringify(contrasena);
+          await AsyncStorage.setItem("contrasena", cliente_contrasena);
         
           console.log(json.msj);
           Alert.alert("Prometheus", json.msj);

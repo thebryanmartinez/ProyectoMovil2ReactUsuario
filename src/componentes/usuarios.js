@@ -29,15 +29,32 @@ export default function App({ navigation }) {
 
   const readData = async () => {
     try {
-      var cliente = JSON.parse(await AsyncStorage.getItem("cliente_datos"));
-      setNombre_Usuario(cliente.nombre_usuario);
-      setNombre_Completo(cliente.nombre_completo);
-      setContrasena_Encriptada(cliente.contrasena_encriptada);
-      setCorreo(cliente.correo);
-      setTelefono(cliente.telefono);
-      setDireccion_Usuario(cliente.direccion_usuario);
+      var nombre = JSON.parse(await AsyncStorage.getItem("cliente_usuario"));
+      var contrasena = JSON.parse(await AsyncStorage.getItem("contrasena"));
+      var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
+      var token = cliente.token;
+      const response = await fetch(
+        'http://192.168.0.8:3001/api/usuarios/?nombre_usuario=' + nombre , {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          
+        });
+      const json = await response.json();
+      var id= json.idusuario;
+      console.log(json);
+      setNombre_Completo(json.nombre_completo);
+      setNombre_Usuario(json.nombre_usuario);
+      setContrasena_Encriptada(contrasena);
+      setCorreo(json.correo);
+      setTelefono(json.telefono);
+      setDireccion_Usuario(json.direccion_usuario);
+
     } catch (error) {
-      Alert.alert("Error al leer:" + error);
+      console.error(error);
     }
   };
 
