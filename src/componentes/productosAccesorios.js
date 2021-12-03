@@ -7,15 +7,22 @@ import {
   FlatList,
   Image,
   TextInput,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
+import { globalBotones } from "../styles/botones";
 
 export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
   const [ejecucion, setEjecucion] = useState(null);
   const [search, setSearch] = useState("");
+  const [idproductos, setidproductos] = useState(null);
+  const [nombre_producto, setnombre_producto] = useState(null);
+  const [marca_producto, setmarca_producto] = useState(null);
+  const [precio_producto, setprecio_producto] = useState(null);
 
   if (ejecucion == null) {
     try {
@@ -66,6 +73,22 @@ export default function App({ navigation }) {
     }
   };
 
+  const elegir = async (item) => {
+    console.log(item);
+    setidproductos(item.idproductos);
+    setnombre_producto(item.nombre_producto);
+    setmarca_producto(item.marca_producto);
+    setprecio_producto(item.precio_producto);
+    const datos = {
+      idproductos: idproductos,
+      nombre_producto: nombre_producto,
+      marca_producto: marca_producto,
+      precio_producto: precio_producto,
+    };
+    const datos_productos = JSON.stringify(datos);
+    await AsyncStorage.setItem("datos_productos", datos_productos);
+  };
+
   return (
     <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
@@ -111,6 +134,16 @@ export default function App({ navigation }) {
                           L. {item.costo}
                         </Text>
                       </View>
+                      <Pressable onPress={() => elegir(item)}>
+                        <LinearGradient
+                          style={globalBotones.boton}
+                          start={{ x: 0, y: 0 }}
+                          end={{ x: 0, y: 1 }}
+                          colors={["#E43E31", "#F4AA31"]}
+                        >
+                          <Text style={globalBotones.tituloBoton}>Elegir</Text>
+                        </LinearGradient>
+                      </Pressable>
                     </View>
                   </Pressable>
                 );

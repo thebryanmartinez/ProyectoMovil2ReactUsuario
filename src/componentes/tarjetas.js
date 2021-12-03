@@ -47,7 +47,6 @@ export default function App({ navigation }) {
       Fecha.getDate();
     setchooseData(FechaFormato);
     setfecha_vencimiento(FechaFormato);
-    Alert.alert("SEVAN" +FechaFormato);
   };
 
   const showDatePicker = () => {
@@ -59,73 +58,70 @@ export default function App({ navigation }) {
   };
 
   const handleConfirm = (date) => {
-    // console.warn("A date has been picked: ", date);
     hideDatePicker();
     Mostrar(date);
   };
 
-  //const listar = async () => {
-      //};
-
-  const pressSEVAN = async () => {
+  const IntroducirTarjeta = async () => {
     try {
       var nombre = JSON.parse(await AsyncStorage.getItem("cliente_usuario"));
       var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
       var token = cliente.token;
       const response = await fetch(
-        'http://192.168.0.8:3001/api/usuarios/?nombre_usuario=' + nombre , {
+        "http://192.168.1.165:3001/api/usuarios/?nombre_usuario=" + nombre,
+        {
           method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,
           },
-          
-        });
+        }
+      );
       const json = await response.json();
-      var id= json.idusuario;
+      var id = json.idusuario;
       console.log(json);
-      Alert.alert("PERROOS" + id);
       setidusuario(id);
     } catch (error) {
       console.error(error);
     }
-    Alert.alert("HOLA" + "" + idusuario + "" + num_tarjeta + ""+ fecha_vencimiento + ""+ VIN + ""+tipo_tarjeta);
-    if (!idusuario ||!num_tarjeta ||!fecha_vencimiento ||!VIN ||!tipo_tarjeta) {
+    if (
+      !idusuario ||
+      !num_tarjeta ||
+      !fecha_vencimiento ||
+      !VIN ||
+      !tipo_tarjeta
+    ) {
       console.log("Debe escribir los datos completos");
       Alert.alert("Prometheus", "Debe escribir los datos completos");
     } else {
       try {
-        const response = await fetch(
-          "http://192.168.0.8:3001/api/tarjetas",
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-            body: JSON.stringify({
-              num_tarjeta: num_tarjeta,
-              fecha_vencimiento: fecha_vencimiento,
-              VIN:VIN,
-              tipo_tarjeta:tipo_tarjeta,
-              idusuario:idusuario
-
-            }),
-          }
-        );
+        const response = await fetch("http://192.168.1.165:3001/api/tarjetas", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({
+            num_tarjeta: num_tarjeta,
+            fecha_vencimiento: fecha_vencimiento,
+            VIN: VIN,
+            tipo_tarjeta: tipo_tarjeta,
+            idusuario: idusuario,
+          }),
+        });
 
         const usu = {
-          num_tarjeta: num_tarjeta, 
+          num_tarjeta: num_tarjeta,
           fecha_vencimiento: fecha_vencimiento,
           VIN: VIN,
           tipo_tarjeta: tipo_tarjeta,
-          idusuario: idusuario
-      };
+          idusuario: idusuario,
+        };
 
         const json = await response.json();
-        
+
         console.log(json);
         const tarjeta = JSON.stringify(usu);
         await AsyncStorage.setItem("tarjeta", tarjeta);
@@ -190,7 +186,7 @@ export default function App({ navigation }) {
           <StatusBar style="auto" />
 
           <View style={styles.contenedorBotones}>
-            <Pressable onPress={() => navigation.replace("Login")}>
+            <Pressable onPress={() => navigation.replace("Usuarios")}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}
@@ -200,7 +196,7 @@ export default function App({ navigation }) {
                 <Text style={globalBotones.tituloBoton}>Cancelar</Text>
               </LinearGradient>
             </Pressable>
-            <Pressable onPress={pressSEVAN}>
+            <Pressable onPress={IntroducirTarjeta}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}

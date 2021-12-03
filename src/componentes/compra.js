@@ -18,35 +18,29 @@ import { globalBotones } from "../styles/botones";
 import { globalEntradas } from "../styles/entradas";
 
 export default function App({ navigation }) {
-  const [ idproductos, setidproductos]= useState(null);
-  const [ nombre_producto, setnombre_producto]= useState(null);
-  const [ marca_producto, setmarca_producto]= useState(null);
-  const [ precio_producto, setprecio_producto]= useState(null);
-  const [ cantidad,  setcantidad] = useState(null);
+  var [idproductos, setidproductos] = useState(null);
+  var [nombre_producto, setnombre_producto] = useState(null);
+  var [marca_producto, setmarca_producto] = useState(null);
+  var [cantidad, setcantidad] = useState(null);
+  var [precio, setPrecio] = useState(null);
+  var [subtotal, setSubtotal] = useState(null);
+  var [impuesto, setImpuesto] = useState(null);
+  var [total, setTotal] = useState(null);
 
-  const sevan = async () =>
-  {
+  const calculosListado = async () => {
     try {
       var datos = JSON.parse(await AsyncStorage.getItem("datos_productos"));
-    }  
-      catch (error) {
-        Alert.alert("Error al leer:" + error);
-      }
-      setidproductos(datos.idproductos);
-      setnombre_producto(datos.nombre_producto);
-      setmarca_producto(datos.marca_producto);
-      setprecio_producto(datos.precio_producto);
-       var precio = datos.precio_producto;
-       var subtotal= 0;
-       subtotal=(parseInt(precio,10)*parseInt(cantidad,10));
-       var impuesto=0;
-       impuesto=(parseInt(subtotal,10)*0.15);
-       var total=0;
-       total=(parseInt(subtotal,10)+ parseInt(impuesto,10));
-      
-      Alert.alert("PERROS" + idproductos + "" + nombre_producto + "" +marca_producto + "" + precio_producto );
-      Alert.alert("Calculos" + precio + "" + subtotal + "" + impuesto + "" +total )
-  }
+    } catch (error) {
+      Alert.alert("Error al leer:" + error);
+    }
+    setidproductos(datos.idproductos);
+    setnombre_producto(datos.nombre_producto);
+    setmarca_producto(datos.marca_producto);
+    setPrecio(datos.precio_producto);
+    setSubtotal(parseInt(precio, 10) * parseInt(cantidad, 10));
+    setImpuesto(parseInt(subtotal, 10) * 0.15);
+    setTotal(parseInt(subtotal, 10) + parseInt(impuesto, 10));
+  };
 
   return (
     <SafeAreaView style={styles.fondo}>
@@ -60,8 +54,8 @@ export default function App({ navigation }) {
           </View>
           <View style={styles.contenedorInfo}>
             <View style={styles.contenedores}>
-              <Text style={globalTyT.texto}>Nombre</Text>
-              <Text style={globalTyT.texto}>Marca</Text>
+              <Text style={globalTyT.texto}>{nombre_producto}</Text>
+              <Text style={globalTyT.texto}>{marca_producto}</Text>
             </View>
             <View></View>
             <View style={styles.contenedores}>
@@ -75,13 +69,13 @@ export default function App({ navigation }) {
               />
             </View>
             <View style={styles.contenedores}>
-              <Text style={globalTyT.texto}>Subtotal</Text>
-              <Text style={globalTyT.texto}>Impuesto</Text>
+              <Text style={globalTyT.texto}>Sbt: {subtotal}</Text>
+              <Text style={globalTyT.texto}>Isv: {impuesto}</Text>
             </View>
             <View>
-              <Text style={globalTyT.texto}>Total</Text>
+              <Text style={globalTyT.texto}>Ttl: {total}</Text>
             </View>
-            <Pressable onPress={() => navigation.replace("Tarjetas")}>
+            <Pressable onPress={() => navigation.replace("CarritoCompras")}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}
@@ -91,7 +85,7 @@ export default function App({ navigation }) {
                 <Text style={globalBotones.tituloBoton}>Comprar</Text>
               </LinearGradient>
             </Pressable>
-            <Pressable onPress={sevan}>
+            <Pressable onPress={calculosListado}>
               <LinearGradient
                 style={globalBotones.boton}
                 start={{ x: 0, y: 0 }}

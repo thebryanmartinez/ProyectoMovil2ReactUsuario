@@ -6,7 +6,6 @@ import {
   TextInput,
   Alert,
   Pressable,
-  Image,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
@@ -26,7 +25,7 @@ export default function login({ navigation }) {
     } else {
       try {
         const response = await fetch(
-          "http://192.168.0.8:3001/api/autenticacion/iniciosesion/",
+          "http://192.168.1.165:3001/api/autenticacion/iniciosesion/",
           {
             method: "POST",
             headers: {
@@ -40,7 +39,7 @@ export default function login({ navigation }) {
           }
         );
         const json = await response.json();
-        
+
         console.log(json);
         if (json.data.length == 0) {
           console.log(json.msj);
@@ -54,7 +53,7 @@ export default function login({ navigation }) {
 
           const cliente_contrasena = JSON.stringify(contrasena);
           await AsyncStorage.setItem("contrasena", cliente_contrasena);
-        
+
           console.log(json.msj);
           Alert.alert("Prometheus", json.msj);
           navigation.replace("Principal");
@@ -106,27 +105,16 @@ export default function login({ navigation }) {
               </LinearGradient>
             </Pressable>
           </View>
-          <View style={styles.contenedorBotonesRedes}>
-            <View style={styles.botonRedes}>
-              <Text style={styles.texto}>No esta registrado?</Text>
-            </View>
             <View style={styles.botonRedes}>
               <Pressable onPress={() => navigation.replace("Registro")}>
                 <Text style={styles.registreseAqui}>Registrese aquí</Text>
               </Pressable>
-            </View>
           </View>
-          <View style={styles.contenedorBotonesRedes}>
-            <View style={styles.botonRedes}>
-              <Text style={styles.texto}>Se te olvido tu contrasena?</Text>
-            </View>
             <View style={styles.botonRedes}>
               <Pressable onPress={() => navigation.replace("Correo")}>
-                <Text style={styles.registreseAqui}>Ingresa aqui</Text>
+                <Text style={styles.registreseAqui}>Se le olvidó su contraseña</Text>
               </Pressable>
             </View>
-          </View>
-          
         </View>
       </View>
     </View>

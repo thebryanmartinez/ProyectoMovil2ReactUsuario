@@ -19,16 +19,14 @@ export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
   const [ejecucion, setEjecucion] = useState(null);
   const [search, setSearch] = useState("");
-  const [ idproductos, setidproductos]= useState(null);
-  const [ nombre_producto, setnombre_producto]= useState(null);
-  const [ marca_producto, setmarca_producto]= useState(null);
-  const [ precio_producto, setprecio_producto]= useState(null);
-
-
+  const [idproductos, setidproductos] = useState(null);
+  const [nombre_producto, setnombre_producto] = useState(null);
+  const [marca_producto, setmarca_producto] = useState(null);
+  const [precio_producto, setprecio_producto] = useState(null);
 
   if (ejecucion == null) {
     try {
-      const response = fetch("http://192.168.0.8:3001/api/productos/listar2")
+      const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
         .then((response) => response.json())
         .then((json) => {
           setinfo(json);
@@ -42,14 +40,12 @@ export default function App({ navigation }) {
   }
 
   const elegir = async (item) => {
-    console.log(item)
-    Alert.alert(item.nombre_producto);
+    console.log(item);
     setidproductos(item.idproductos);
     setnombre_producto(item.nombre_producto);
     setmarca_producto(item.marca_producto);
     setprecio_producto(item.precio_producto);
-    const datos = 
-    {
+    const datos = {
       idproductos: idproductos,
       nombre_producto: nombre_producto,
       marca_producto: marca_producto,
@@ -57,12 +53,7 @@ export default function App({ navigation }) {
     };
     const datos_productos = JSON.stringify(datos);
     await AsyncStorage.setItem("datos_productos", datos_productos);
-    Alert.alert("PERROS" + idproductos + "" + nombre_producto + "" +marca_producto + "" + precio_producto );
-    navigation.replace("Compra");
-
   };
-
-
 
   const searchFilter = (text) => {
     if (text) {
@@ -78,9 +69,7 @@ export default function App({ navigation }) {
       setSearch(text);
     } else {
       try {
-        const response = fetch(
-          "http://192.168.0.8:3001/api/productos/listar2"
-        )
+        const response = fetch("http://192.168.0.8:3001/api/productos/listar2")
           .then((response) => response.json())
           .then((json) => {
             setinfo(json);

@@ -34,7 +34,7 @@ export default function App({ navigation }) {
       var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
       var token = cliente.token;
       const response = await fetch(
-        'http://192.168.0.8:3001/api/usuarios/?nombre_usuario=' + nombre , {
+        'http://192.168.1.165:3001/api/usuarios/?nombre_usuario=' + nombre , {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -65,7 +65,7 @@ export default function App({ navigation }) {
       catch (error) {
         Alert.alert("Error al leer:" + error);
       }
-    fetch("http://192.168.0.8:3001/api/usuarios/" + nombre, {
+    fetch("http://192.168.1.165:3001/api/usuarios/" + nombre, {
       method: "DELETE",
       
     })
@@ -83,7 +83,7 @@ export default function App({ navigation }) {
       catch (error) {
         Alert.alert("Error al leer:" + error);
       }
-    fetch("http://192.168.0.8:3001/api/usuarios/?nombre_usuario=" + nombre, {
+    fetch("http://192.168.1.165:3001/api/usuarios/?nombre_usuario=" + nombre, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -189,7 +189,7 @@ export default function App({ navigation }) {
               </LinearGradient>
             </Pressable>
           </View>
-          <View style={styles.eliminarUsuario}>
+          <View style={styles.textoYBoton}>
             <Text style={globalTyT.texto}>Desea eliminar su usuario?</Text>
             <Pressable onPress={eliminarUsuario}>
               <LinearGradient
@@ -199,6 +199,19 @@ export default function App({ navigation }) {
                 colors={["#E43E31", "#F4AA31"]}
               >
                 <Text style={globalBotones.tituloBoton}>Eliminar</Text>
+              </LinearGradient>
+            </Pressable>
+          </View>
+          <View style={styles.textoYBoton}>
+            <Text style={globalTyT.texto}>Ingresar tarjeta de credito</Text>
+            <Pressable onPress={() => navigation.replace("Tarjetas")}>
+              <LinearGradient
+                style={globalBotones.boton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                colors={["#E43E31", "#F4AA31"]}
+              >
+                <Text style={globalBotones.tituloBoton}>Ingresar tarjeta</Text>
               </LinearGradient>
             </Pressable>
           </View>
@@ -257,7 +270,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
   },
-  eliminarUsuario: {
+  textoYBoton: {
     marginTop: 50,
   },
 });
