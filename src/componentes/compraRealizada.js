@@ -12,7 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalTyT } from "../styles/textoytitulo";
 import { globalBotones } from "../styles/botones";
-import { globalEntradas } from "../styles/entradas";
 
 export default function App({ navigation }) {
   return (
