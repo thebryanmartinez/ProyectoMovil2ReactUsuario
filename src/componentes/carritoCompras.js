@@ -8,11 +8,13 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
+  Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
 import { globalTyT } from "../styles/textoytitulo";
+import { globalBotones } from "../styles/botones";
 
 export default function App({ navigation }) {
   const [info, setinfo] = useState([]);
@@ -21,7 +23,9 @@ export default function App({ navigation }) {
 
   if (ejecucion == null) {
     try {
-      const response = fetch("http://192.168.0.8:3001/api/detalles_factura/listar2")
+      const response = fetch(
+        "http://192.168.1.165:3001/api/detalles_factura/listar2"
+      )
         .then((response) => response.json())
         .then((json) => {
           setinfo(json);
@@ -34,7 +38,14 @@ export default function App({ navigation }) {
     }
   }
 
-
+  function eliminarDetalle(id) {
+    fetch("http://192.168.1.165:3001/api/detalles_factura/" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.text()) // or res.json()
+      .then((res) => console.log(res));
+    Alert.alert("Eliminado", "Su producto ha sido eliminado del carrito");
+  }
 
   return (
     <SafeAreaView style={styles.fondo}>
@@ -68,7 +79,12 @@ export default function App({ navigation }) {
                         </Text>
                       </View>
                       <View styles={styles.contenedorBoton}>
-                        <Pressable style={styles.eliminar}>
+                        <Pressable
+                          style={styles.eliminar}
+                          onPress={() =>
+                            eliminarDetalle(item.iddetalles_Factura)
+                          }
+                        >
                           <Image
                             source={require("../../assets/img/shoppingcart_error.png")}
                           />
@@ -80,6 +96,18 @@ export default function App({ navigation }) {
               }}
             />
           </View>
+        </View>
+        <View style={styles.contenedorBoton}>
+          <Pressable onPress={() => navigation.replace("CompraRealizada")}>
+            <LinearGradient
+              style={globalBotones.botonConMargen}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              colors={["#E43E31", "#F4AA31"]}
+            >
+              <Text style={globalBotones.tituloBoton}>Comprar</Text>
+            </LinearGradient>
+          </Pressable>
         </View>
         <View>
           <LinearGradient
@@ -168,5 +196,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     backgroundColor: "#ED553B",
+  },
+  contenedorBoton: {
+    marginHorizontal: 20,
+    marginBottom: 20,
   },
 });

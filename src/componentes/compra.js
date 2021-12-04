@@ -51,7 +51,7 @@ export default function App({ navigation }) {
         var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
         var token = cliente.token;
         const response = await fetch(
-          "http://192.168.0.8:3001/api/usuarios/?nombre_usuario=" + nombre,
+          "http://192.168.1.165:3001/api/usuarios/?nombre_usuario=" + nombre,
           {
             method: "GET",
             headers: {
@@ -70,10 +70,7 @@ export default function App({ navigation }) {
       }
   };
 
-
   const pressdetalle = async () => {
-
-
     if (
       !idproductos ||
       !nombre_producto ||
@@ -93,7 +90,7 @@ export default function App({ navigation }) {
         var token = cliente.token;
         
 
-        const response = await fetch("http://192.168.0.8:3001/api/detalles_factura/guardar", {
+        const response = await fetch("http://192.168.1.165:3001/api/detalles_factura/guardar", {
           method: "POST",
           headers: {
             Accept: "application/json",
