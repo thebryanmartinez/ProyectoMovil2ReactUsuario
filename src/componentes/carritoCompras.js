@@ -21,7 +21,7 @@ export default function App({ navigation }) {
 
   if (ejecucion == null) {
     try {
-      const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
+      const response = fetch("http://192.168.0.8:3001/api/detalles_factura/listar2")
         .then((response) => response.json())
         .then((json) => {
           setinfo(json);
@@ -33,6 +33,8 @@ export default function App({ navigation }) {
       console.error(error);
     }
   }
+
+
 
   return (
     <SafeAreaView style={styles.fondo}>
@@ -46,7 +48,7 @@ export default function App({ navigation }) {
               numColumns={1}
               style={styles.productos}
               data={info}
-              keyExtractor={(item) => item.idproductos}
+              keyExtractor={(item) => item.iddetalles_Factura}
               renderItem={({ item }) => {
                 return (
                   <Pressable style={styles.contenedorFuera}>
@@ -62,7 +64,7 @@ export default function App({ navigation }) {
                           {item.nombre_producto}
                         </Text>
                         <Text style={styles.productoPrecio}>
-                          L. {item.costo}
+                          L. {item.total}
                         </Text>
                       </View>
                       <View styles={styles.contenedorBoton}>

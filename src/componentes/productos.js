@@ -26,7 +26,7 @@ export default function App({ navigation }) {
 
   if (ejecucion == null) {
     try {
-      const response = fetch("http://192.168.1.165:3001/api/productos/listar2")
+      const response = fetch("http://192.168.0.8:3001/api/productos/listar2")
         .then((response) => response.json())
         .then((json) => {
           setinfo(json);
@@ -53,6 +53,8 @@ export default function App({ navigation }) {
     };
     const datos_productos = JSON.stringify(datos);
     await AsyncStorage.setItem("datos_productos", datos_productos);
+    
+    
   };
 
   const searchFilter = (text) => {
