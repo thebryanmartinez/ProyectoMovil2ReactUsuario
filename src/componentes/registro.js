@@ -23,6 +23,7 @@ export default function App({ navigation }) {
   const [telefono, setTelefono] = useState(null);
   const [direccion_usuario, setDireccion_Usuario] = useState(false);
 
+
   const pressCrearUsuario = async () => {
     if (
       !nombre_completo ||
@@ -35,6 +36,7 @@ export default function App({ navigation }) {
       console.log("Debe escribir los datos completos");
       Alert.alert("Prometheus", "Debe escribir los datos completos");
     } else {
+      
       try {
         var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
         var token = cliente.token;
@@ -113,10 +115,11 @@ export default function App({ navigation }) {
           <Text style={globalTyT.texto}>Telefono: </Text>
           <TextInput
             style={globalEntradas.entradaTexto}
-            keyboardType="number-pad"
+            keyboardType = 'numeric'
             onChangeText={setTelefono}
             placeholder="Telefono"
             placeholderTextColor="#ced4da"
+            maxLength={10}
           ></TextInput>
           <Text style={globalTyT.texto}>Direccion domiciliaria: </Text>
           <TextInput
