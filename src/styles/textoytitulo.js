@@ -13,4 +13,10 @@ export const globalTyT = StyleSheet.create({
     fontSize: 24,
     fontFamily: "montserrat-bold",
   },
+  textoSmall: {
+    textAlign: "left",
+    color: "#ed7731",
+    fontSize: 22,
+    fontFamily: "montserrat-semibold",
+  }
 });

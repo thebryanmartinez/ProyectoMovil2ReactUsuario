@@ -15,6 +15,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { globalFooter } from "../styles/footer";
 import { globalTyT } from "../styles/textoytitulo";
 import { ModalPicker } from "./ModalPicker";
+import { render } from "react-dom";
 
 var ops;
 
@@ -35,31 +36,20 @@ export default function App({ navigation }) {
     ops = option;
     setchooseData(option);
 
-    if(ops=='Camisas')
-    {
-      navigation.replace('ProductosCamisas') 
-    }
-    else
-    {
-      if(ops=='Joggers')
-      {
-        navigation.replace('ProductosJoggers')
-      }
-      else
-      {
-        if(ops=='Accesorios')
-        {
-          navigation.replace('ProductosAccesorios')
-        }
-        else
-        {
-           if(ops=='Sneakers')
-           {
-              navigation.replace('ProductosSneakers')
-           }
+    if (ops == "Camisas") {
+      navigation.replace("ProductosCamisas");
+    } else {
+      if (ops == "Joggers") {
+        navigation.replace("ProductosJoggers");
+      } else {
+        if (ops == "Accesorios") {
+          navigation.replace("ProductosAccesorios");
+        } else {
+          if (ops == "Sneakers") {
+            navigation.replace("ProductosSneakers");
+          }
         }
       }
-     
     }
   };
 
@@ -82,30 +72,48 @@ export default function App({ navigation }) {
             </View>
           </View>
         </View>
+        <Modal
+          transparent={true}
+          animationType="fade"
+          visible={isModalVisible}
+          nRequestClose={() => changeModalVisibility(false)}
+        >
+          <ModalPicker
+            changeModalVisibility={changeModalVisibility}
+            setData={setData}
+          />
+        </Modal>
+
         <ScrollView style={styles.main}>
-          <Modal
-            transparent={true}
-            animationType="fade"
-            visible={isModalVisible}
-            nRequestClose={() => changeModalVisibility(false)}
-          >
-            <ModalPicker
-              changeModalVisibility={changeModalVisibility}
-              setData={setData}
-            />
-          </Modal>
           <Image
-            source={require("../../assets/img/adidas1.jpg")}
-            styles={styles.imagen}
-          />
-          <Image
-            source={require("../../assets/img/adidas2.jpg")}
-            styles={styles.imagen}
-          />
-          <Image
-            source={require("../../assets/img/adidas3.jpg")}
-            styles={styles.imagen}
-          />
+            source={require("../../assets/img/PrometheusLogo.jpg")}
+            style={styles.imagen}
+          ></Image>
+
+          <View style={styles.contenedorSmall}>
+            <Text style={globalTyT.titulo}>MISIÓN</Text>
+            <Text style={globalTyT.textoSmall}>
+              Ofrecer a nuestros clientes productos de calidad, a precios
+              cómodos que cumplan con sus necesidades y exigencias, abarcando
+              sus gustos de acuerdo a su estilo de ver y vivir la vida.
+            </Text>
+          </View>
+          <View style={styles.contenedorSmall}>
+            <Text style={globalTyT.titulo}>VISIÓN</Text>
+            <Text style={globalTyT.textoSmall}>
+              Ser una empresa líder y reconocida en la venta de ropa, lograr
+              también extendernos y crear nuestras cadenas de almacenes,
+              proporcionando cada día más un servicio de excelencia a nuestros
+              clientes y que al mismo tiempo nos permitan competir en el mercado
+              nacional con los mejores precios del mercado.
+            </Text>
+          </View>
+          <View style={styles.contenedorSmall}>
+            <Text style={globalTyT.titulo}>Aplicacion hecha por: </Text>
+            <Text style={globalTyT.textoSmall}>Lizzi Silva Alonzo</Text>
+            <Text style={globalTyT.textoSmall}>Bryan Martinez Zelaya</Text>
+            <Text style={globalTyT.textoSmall}>Otoniel Aguirre Aguilar</Text>
+          </View>
         </ScrollView>
         <View>
           <LinearGradient
@@ -153,11 +161,11 @@ const styles = StyleSheet.create({
   },
   main: {
     display: "flex",
-    marginTop: 25,
-    marginLeft: 20,
+    marginHorizontal: 20,
   },
   imagen: {
-    marginTop: 20,
+    height: 400,
+    width: 400,
   },
   headerbotones: {
     display: "flex",
@@ -168,5 +176,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+  },
+  contenedorSmall: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 15,
   },
 });

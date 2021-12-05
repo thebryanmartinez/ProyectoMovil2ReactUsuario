@@ -26,7 +26,9 @@ export default function App({ navigation }) {
 
   if (ejecucion == null) {
     try {
-      const response = fetch("http://192.168.1.165:3001/api/productos/snekers?idcategorias=1")
+      const response = fetch(
+        "http://192.168.1.165:3001/api/productos/camisas"
+      )
         .then((response) => response.json())
         .then((json) => {
           setinfo(json);
@@ -54,7 +56,7 @@ export default function App({ navigation }) {
     } else {
       try {
         const response = fetch(
-          "http://192.168.1.165:3001/api/productos/snekers?idcategorias=1"
+          "http://192.168.1.165:3001/api/productos/camisas"
         )
           .then((response) => response.json())
           .then((json) => {

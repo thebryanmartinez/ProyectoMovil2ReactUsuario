@@ -27,7 +27,7 @@ export default function App({ navigation }) {
   if (ejecucion == null) {
     try {
       const response = fetch(
-        "http://192.168.1.165:3001/api/productos/accesorios?idcategorias=4"
+        "http://192.168.1.165:3001/api/productos/accesorios"
       )
         .then((response) => response.json())
         .then((json) => {
@@ -56,7 +56,7 @@ export default function App({ navigation }) {
     } else {
       try {
         const response = fetch(
-          "http://192.168.1.165:3001/api/productos/accesorios?idcategorias=4"
+          "http://192.168.1.165:3001/api/productos/accesorios"
         )
           .then((response) => response.json())
           .then((json) => {
