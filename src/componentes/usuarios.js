@@ -117,6 +117,7 @@ export default function App({ navigation }) {
             onChangeText={setNombre_Completo}
             placeholderTextColor="#ced4da"
             placeholder="Nombre completo"
+
           >
             {nombre_completo}
           </TextInput>
@@ -143,7 +144,9 @@ export default function App({ navigation }) {
             style={globalEntradas.entradaTexto}
             onChangeText={setCorreo}
             placeholder="Correo electronico"
+            keyboardType = "email-address"
             placeholderTextColor="#ced4da"
+            maxLength={50}
           >
             {correo}
           </TextInput>
@@ -151,8 +154,10 @@ export default function App({ navigation }) {
           <TextInput
             style={globalEntradas.entradaTexto}
             onChangeText={setTelefono}
+            keyboardType = "numeric"
             placeholder="Telefono"
             placeholderTextColor="#ced4da"
+            maxLength={10}
           >
             {telefono}
           </TextInput>

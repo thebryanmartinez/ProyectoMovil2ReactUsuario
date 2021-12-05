@@ -55,9 +55,16 @@ export default function App({ navigation }) {
           .then((response) => response.json())
           .then((json) => {
             setinfo(json);
+          
             console.log(json);
+           
+            if(json.Array==null)
+            {
+              Alert.alert("No a seleccionado ningun producto");
+            }
           });
         setEjecucion(false);
+        
       } catch (error) {
         setEjecucion(false);
         console.error(error);
@@ -101,7 +108,7 @@ export default function App({ navigation }) {
     const json = await factura.json();
     var idfacturas= json.idfacturas;
     Alert.alert("Fac reciente" + idusuario);
-
+    if(!idfacturas){
     fetch("http://192.168.0.8:3001/api/detalles_factura/modificar?idusuario=" + idusuario, {
       method: "PUT",
       headers: {
@@ -116,9 +123,13 @@ export default function App({ navigation }) {
     })
       .then((res) => res.text()) // or res.json()
       .then((res) => console.log(res));
+    
     Alert.alert("Actualizado", "El Usuario ha sido Actualizado con exito");
     navigation.replace("CompraRealizada");
-
+  }else
+  {
+    Alert.alert("No tiene ningun producto en el carrito");
+  }
 }
 
   function eliminarDetalle(id) {

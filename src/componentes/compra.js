@@ -81,7 +81,6 @@ export default function App({ navigation }) {
       !idusuario ||
       !nombre_usuario 
     ) {
-      Alert.alert("" + idproductos + "" + nombre_producto + "" + cantidad + "" + subtotal + impuesto + "" +total + "" + idusuario  + "" +nombre_usuario)
       console.log("Debe escribir los datos completos");
       Alert.alert("Prometheus", "Debe escribir los datos completos");
     } else {
@@ -109,6 +108,7 @@ export default function App({ navigation }) {
             nombre_usuario:nombre_usuario
           }),
         });
+        
         Alert.alert("Prometheus", "Detalle ingresado correctamente");
       } catch (error) {
         console.error(error);
