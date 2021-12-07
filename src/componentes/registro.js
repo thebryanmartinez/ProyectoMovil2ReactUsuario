@@ -41,7 +41,7 @@ export default function App({ navigation }) {
         var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
         var token = cliente.token;
 
-        const response = await fetch("http://192.168.0.8:3001/api/usuarios", {
+        const response = await fetch("http://192.168.1.165:3001/api/usuarios", {
           method: "POST",
           headers: {
             Accept: "application/json",

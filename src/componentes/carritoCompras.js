@@ -22,7 +22,6 @@ export default function App({ navigation }) {
   const [search, setSearch] = useState("");
   const [idusuario, setidusuario] = useState(null);
   var idusu;
-  
 
   const Introducir = async () => {
     try {
@@ -30,7 +29,7 @@ export default function App({ navigation }) {
       var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
       var token = cliente.token;
       const response = await fetch(
-        "http://192.168.0.8:3001/api/usuarios/?nombre_usuario=" + nombre,
+        "http://192.168.1.165:3001/api/usuarios/?nombre_usuario=" + nombre,
         {
           method: "GET",
           headers: {
@@ -47,104 +46,93 @@ export default function App({ navigation }) {
     } catch (error) {
       console.error(error);
     }
-      try {
-        idusu= idusuario;
-        const response = fetch(
-          "http://192.168.0.8:3001/api/detalles_factura/listar2?idusuario=" + idusu
-        )
-          .then((response) => response.json())
-          .then((json) => {
-            setinfo(json);
-          
-            console.log(json);
-           
-            if(json.Array==null)
-            {
-              Alert.alert("No a seleccionado ningun producto");
-            }
-          });
-        setEjecucion(false);
-        
-      } catch (error) {
-        setEjecucion(false);
-        console.error(error);
-      }
-      
-  }
+    try {
+      idusu = idusuario;
+      const response = fetch(
+        "http://192.168.1.165:3001/api/detalles_factura/listar2?idusuario=" +
+          idusu
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          setinfo(json);
+
+          console.log(json);
+        });
+      setEjecucion(false);
+    } catch (error) {
+      setEjecucion(false);
+      console.error(error);
+    }
+  };
   const GuardarFactura = async () => {
-  try {
-    var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
-    var token = cliente.token;
+    try {
+      var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
+      var token = cliente.token;
 
-    const response = await fetch("http://192.168.0.8:3001/api/facturas/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
+      const response = await fetch("http://192.168.1.165:3001/api/facturas/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
 
-      body: JSON.stringify({
-        idusuario:idusuario
-      }),
-    });
-    Alert.alert("Prometheus", "Factura creada");
-
-  } catch (error) {
-    console.error(error);
-
-  }
-  const factura = await fetch(
-    'http://192.168.0.8:3001/api/facturas/facturaReciente', {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-        
-      },
-      
-    });
+        body: JSON.stringify({
+          idusuario: idusuario,
+        }),
+      });
+      Alert.alert("Prometheus", "Compra realizada");
+    } catch (error) {
+      console.error(error);
+    }
+    const factura = await fetch(
+      "http://192.168.1.165:3001/api/facturas/facturaReciente",
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     const json = await factura.json();
-    var idfacturas= json.idfacturas;
-    Alert.alert("Fac reciente" + idusuario);
-    if(!idfacturas){
-    fetch("http://192.168.0.8:3001/api/detalles_factura/modificar?idusuario=" + idusuario, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+    var idfacturas = json.idfacturas;
+    if (!idfacturas) {
+      fetch(
+        "http://192.168.1.165:3001/api/detalles_factura/modificar?idusuario=" +
+          idusuario,
+        {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
 
-      body: JSON.stringify({
-
-        idfacturas:idfacturas
-      }),
-    })
-      .then((res) => res.text()) // or res.json()
-      .then((res) => console.log(res));
-    
-    Alert.alert("Actualizado", "El Usuario ha sido Actualizado con exito");
-    navigation.replace("CompraRealizada");
-  }else
-  {
-    Alert.alert("No tiene ningun producto en el carrito");
-  }
-}
+          body: JSON.stringify({
+            idfacturas: idfacturas,
+          }),
+        }
+      )
+        .then((res) => res.text()) // or res.json()
+        .then((res) => console.log(res));
+      navigation.replace("CompraRealizada");
+    } else {
+      Alert.alert("No tiene ningun producto en el carrito");
+    }
+  };
 
   function eliminarDetalle(id) {
-    fetch("http://192.168.0.8:3001/api/detalles_factura/" + id, {
+    fetch("http://192.168.1.165:3001/api/detalles_factura/" + id, {
       method: "DELETE",
     })
       .then((res) => res.text()) // or res.json()
       .then((res) => console.log(res));
     Alert.alert("Eliminado", "Su producto ha sido eliminado del carrito");
-   
   }
 
-
   return (
-    <SafeAreaView style={styles.fondo} >
+    <SafeAreaView style={styles.fondo}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={globalTyT.titulo}>COMPRAS</Text>
@@ -193,18 +181,18 @@ export default function App({ navigation }) {
             />
           </View>
         </View>
-        
+
         <View style={styles.contenedorBoton}>
-        <Pressable onPress={Introducir}>
-              <LinearGradient
-                style={globalBotones.botonConMargen}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                colors={["#E43E31", "#F4AA31"]}
-              >
-                <Text style={globalBotones.tituloBoton}>Llenar</Text>
-              </LinearGradient>
-            </Pressable>
+          <Pressable onPress={Introducir}>
+            <LinearGradient
+              style={globalBotones.botonConMargen}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              colors={["#E43E31", "#F4AA31"]}
+            >
+              <Text style={globalBotones.tituloBoton}>Llenar</Text>
+            </LinearGradient>
+          </Pressable>
           <Pressable onPress={GuardarFactura}>
             <LinearGradient
               style={globalBotones.botonConMargen}
