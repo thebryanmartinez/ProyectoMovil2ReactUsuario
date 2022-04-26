@@ -1,42 +1,40 @@
 
-# Prometheus Mobile App 
-This is an mobile app elaborated for the class of Mobile Programming 2. This is the first mobile app that I made with React Native.  This project was made by a team of 3 people led by me.
-This mobile app was elaborated for a fictional store that sells workout and exercising clothing called Prometheus.
+# Aplicación Móvil Prometheus
+Esta es una aplicación móvil elaborada para la clase de Programación Móvil 2. Esta es la primera aplicación que realice con React Native. Este proyecto fue hecho por un equipo de tres personas lideradas por mí. 
+Esta aplicación móvil fue elaborada para una tienda ficticia que vende ropa deportiva llamada Prometheus.
 
-## Description of the project
-This project was elaborated with Javascript, React Native and Expo. 
+## Descripción del proyecto
+Este proyecto fue elaborado con Javascript, React Native y Expo. 
 
-This React Native app was connected to an API that we also made for storing and collecting the data from the MySQL database running locally. We also made another similar app for the employee of the store, which he or she can add new products, restock inventory and delete or modify products on sale. Here are the links for the repositories:
-- React Native API: https://github.com/Bryanmartz972/ProyectoMovil2
-- React Native employee application: https://github.com/Bryanmartz972/ProyectoMovil2ReactUsuario   
-
-
-## Features
-
-- Login and Signin to the app
-- Buying products from the app
-- Searching of products
-- User shopping cart
+Esta aplicación móvil tiene que estar conectada a una API que fue realizada por este mismo equipo para poder almacenar y recolectar datos e información de la base de datos de MySQL ejecutándose de manera local. También se hizo una aplicación similar para el empleado de la tienda, en el que él o ella podría agregar nuevos productos, reabastecer el inventario y eliminar o modificar los productos en venta. Aquí están los enlaces de los otros repositorios: 
+- Prometheus API: https://github.com/Bryanmartz972/ProyectoMovil2
+- Aplicación Prometheus para el empleado: https://github.com/Bryanmartz972/ProyectoMovil2ReactUsuario   
 
 
-## Installation
-For trying the project locally on your computer, either clone the repository or download the .zip folder and extract it in any folder you like.
-Once you have the project, with Visual Studio Code terminal or any other Bash program (like Git Bash) run the following commands:
+## Características
+
+- Inicio de sesión y creación de cuenta para la aplicación
+- Comprar productos desde la aplicación
+- Búsqueda de productos
+- Carrito de compras del usuario
+
+## Instalación
+Para instalar el proyecto de manera local en la computadora, se tiene que clonar el repositorio o descargar la carpeta .zip y extraerla en cualquier otro carpeta.
+Una vez que se tiene el proyecto, abrir con la terminal de Visual Studio Code o cualquier otra terminal los siguientes comandos:
 
 ```bash
-  npm i // For installing dependencies
-  expo start // For running the project.
+  npm i // Para instalar las dependencias
+  expo start // Para correr el proyecto
 
 ```
-For trying out the project:
-- You have to execute the API first for it to show data
-- You have to change your IP address in every file that another IP address is shown 
+Para probar el proyecto:
+- Se tiene que estar ejecutando la API antes de la aplicación
+- Se tiene que cambiar la dirección IP en cualquier archivo que presente otra dirección IP
 
-When you change all that, you can open the app by installing the "Expo Go" app on your phone and connecting to the app via QRCode by opening the web dev tools for Expo in the terminal with the 'W' key.
- 
+Cuando se cambie todo eso, se puede abrir la aplicación por medio de la aplicación "Expo Go" en tu celular y conectarla por medio del código QR presentándose en la terminal al correr el proyecto.
     
-## Authors
-Here are the Github profile of the members of the team (including me) that made this API come to life:
+## Autores
+Aquí están los perfiles de GitHub de los miembros del equipo (incluyéndome) que hicieron esta aplicación realidad:
 
 - [@Bryanmartz972](https://github.com/Bryanmartz972) 
 - [@Otoniel18a](https://github.com/Otoniel18a)
