@@ -34,7 +34,7 @@ export default function App({ navigation }) {
       var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
       var token = cliente.token;
       const response = await fetch(
-        'http://192.168.1.165:3001/api/usuarios/?nombre_usuario=' + nombre , {
+        'http://192.168.0.3:3001/api/usuarios/?nombre_usuario=' + nombre , {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -65,7 +65,7 @@ export default function App({ navigation }) {
       catch (error) {
         Alert.alert("Error al leer:" + error);
       }
-    fetch("http://192.168.1.165:3001/api/usuarios/" + nombre, {
+    fetch("http://192.168.0.3:3001/api/usuarios/" + nombre, {
       method: "DELETE",
       
     })
@@ -83,7 +83,7 @@ export default function App({ navigation }) {
       catch (error) {
         Alert.alert("Error al leer:" + error);
       }
-    fetch("http://192.168.1.165:3001/api/usuarios/?nombre_usuario=" + nombre, {
+    fetch("http://192.168.0.3:3001/api/usuarios/?nombre_usuario=" + nombre, {
       method: "PUT",
       headers: {
         Accept: "application/json",

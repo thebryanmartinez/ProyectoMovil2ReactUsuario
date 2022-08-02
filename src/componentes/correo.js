@@ -26,7 +26,7 @@ export default function App({ navigation }) {
     } else {
       try {
         const response = await fetch(
-          "http://192.168.1.165:3001/api/autenticacion/recuperacion/",
+          "http://192.168.0.3:3001/api/autenticacion/recuperacion/",
           {
             method: "POST",
             headers: {

@@ -26,7 +26,7 @@ export default function App({ navigation }) {
   if (ejecucion == null) {
     try {
       const response = fetch(
-        "http://192.168.1.165:3001/api/productos/accesorios"
+        "http://192.168.0.3:3001/api/productos/accesorios"
       )
         .then((response) => response.json())
         .then((json) => {
@@ -55,7 +55,7 @@ export default function App({ navigation }) {
     } else {
       try {
         const response = fetch(
-          "http://192.168.1.165:3001/api/productos/accesorios"
+          "http://192.168.0.3:3001/api/productos/accesorios"
         )
           .then((response) => response.json())
           .then((json) => {
@@ -118,7 +118,7 @@ export default function App({ navigation }) {
                     <View style={styles.contenedorDentro}>
                       <View style={styles.contenedorImagen}>
                         <Image
-                          source={{uri: "http://192.168.1.165:3001/api/imagenes/img-1638840919336-637063936image.jpg"}}
+                          source={{uri: "http://192.168.0.3:3001/api/imagenes/img-1638840919336-637063936image.jpg"}}
                           style={styles.imagen}
                         />
                       </View>

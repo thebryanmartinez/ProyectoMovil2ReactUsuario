@@ -29,7 +29,7 @@ export default function App({ navigation }) {
       var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
       var token = cliente.token;
       const response = await fetch(
-        "http://192.168.1.165:3001/api/usuarios/?nombre_usuario=" + nombre,
+        "http://192.168.0.3:3001/api/usuarios/?nombre_usuario=" + nombre,
         {
           method: "GET",
           headers: {
@@ -49,7 +49,7 @@ export default function App({ navigation }) {
     try {
       idusu = idusuario;
       const response = fetch(
-        "http://192.168.1.165:3001/api/detalles_factura/listar2?idusuario=" +
+        "http://192.168.0.3:3001/api/detalles_factura/listar2?idusuario=" +
           idusu
       )
         .then((response) => response.json())
@@ -69,7 +69,7 @@ export default function App({ navigation }) {
       var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
       var token = cliente.token;
 
-      const response = await fetch("http://192.168.1.165:3001/api/facturas/", {
+      const response = await fetch("http://192.168.0.3:3001/api/facturas/", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -86,7 +86,7 @@ export default function App({ navigation }) {
       console.error(error);
     }
     const factura = await fetch(
-      "http://192.168.1.165:3001/api/facturas/facturaReciente",
+      "http://192.168.0.3:3001/api/facturas/facturaReciente",
       {
         method: "GET",
         headers: {
@@ -100,7 +100,7 @@ export default function App({ navigation }) {
     var idfacturas = json.idfacturas;
     if (!idfacturas) {
       fetch(
-        "http://192.168.1.165:3001/api/detalles_factura/modificar?idusuario=" +
+        "http://192.168.0.3:3001/api/detalles_factura/modificar?idusuario=" +
           idusuario,
         {
           method: "PUT",
@@ -123,7 +123,7 @@ export default function App({ navigation }) {
   };
 
   function eliminarDetalle(id) {
-    fetch("http://192.168.1.165:3001/api/detalles_factura/" + id, {
+    fetch("http://192.168.0.3:3001/api/detalles_factura/" + id, {
       method: "DELETE",
     })
       .then((res) => res.text()) // or res.json()

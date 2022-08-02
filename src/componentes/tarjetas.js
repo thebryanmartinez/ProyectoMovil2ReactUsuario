@@ -68,7 +68,7 @@ export default function App({ navigation }) {
       var cliente = JSON.parse(await AsyncStorage.getItem("cliente"));
       var token = cliente.token;
       const response = await fetch(
-        "http://192.168.1.165:3001/api/usuarios/?nombre_usuario=" + nombre,
+        "http://192.168.0.3:3001/api/usuarios/?nombre_usuario=" + nombre,
         {
           method: "GET",
           headers: {
@@ -96,7 +96,7 @@ export default function App({ navigation }) {
       Alert.alert("Prometheus", "Debe escribir los datos completos");
     } else {
       try {
-        const response = await fetch("http://192.168.1.165:3001/api/tarjetas", {
+        const response = await fetch("http://192.168.0.3:3001/api/tarjetas", {
           method: "POST",
           headers: {
             Accept: "application/json",
